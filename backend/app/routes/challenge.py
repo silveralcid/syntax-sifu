@@ -21,28 +21,51 @@ for file in challenges_dir.glob("*.json"):
 @router.get("/challenge/random")
 def get_random_challenge(category: str = None):
     if category:
-        challenges = [c for c in challenge_bank if c["category"].lower() == category.lower()]
+        selected_categories = [c.strip().lower() for c in category.split(",")]
+        challenges = [c for c in challenge_bank if c["category"].lower() in selected_categories]
     else:
         challenges = challenge_bank
-    return random.choice(challenges) if challenges else {"error": "No challenges found for the category."}
+
+    return random.choice(challenges) if challenges else {"error": "No challenges found for the given categories."}
 
 
 @router.get("/challenges")
-def get_challenges(category: str = None, limit: int = Query(None, ge=1)):
+def get_challenges(
+    category: str = Query(None, description="Comma-separated categories"),
+    limit: int = Query(10, ge=1),
+    shuffle: bool = False,
+    seed: int = None
+):
     if category:
-        challenges = [c for c in challenge_bank if c["category"].lower() == category.lower()]
+        selected_categories = [c.strip().lower() for c in category.split(",")]
+        challenges = [c for c in challenge_bank if c["category"].lower() in selected_categories]
     else:
         challenges = challenge_bank
 
     if not challenges:
-        return {"error": "No challenges found for the category."}
+        return {"error": "No challenges found for the given categories."}
 
-    if limit:
-        return challenges[:limit]
-    return challenges
+    if shuffle:
+        if seed is not None:
+            random.seed(seed)
+        random.shuffle(challenges)
+
+    return challenges[:limit] if limit else challenges
 
 
 @router.get("/categories")
 def get_categories():
-    categories = sorted(set(c["category"] for c in challenge_bank))
-    return {"categories": categories}
+    """
+    Return categories along with the number of challenges in each.
+    Example:
+    [
+      { "category": "loops", "count": 12 },
+      { "category": "strings", "count": 15 }
+    ]
+    """
+    categories = {}
+    for c in challenge_bank:
+        cat = c["category"]
+        categories[cat] = categories.get(cat, 0) + 1
+
+    return [{"category": cat, "count": count} for cat, count in sorted(categories.items())]

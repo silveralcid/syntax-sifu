@@ -7,7 +7,16 @@ export default function Home() {
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`)
       .then((res) => res.json())
-      .then((data) => setCategories(data));
+      .then((data) => {
+        // handle both array or object response
+        if (Array.isArray(data)) {
+          setCategories(data);
+        } else if (data.categories) {
+          setCategories(data.categories);
+        } else {
+          console.error("Unexpected categories format:", data);
+        }
+      });
   }, []);
 
   return (
