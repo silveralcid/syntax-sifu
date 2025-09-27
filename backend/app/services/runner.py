@@ -62,16 +62,20 @@ Return ONLY valid JSON in this format:
         content = r.json()["choices"][0]["message"]["content"].strip()
 
         try:
-            return json.loads(content)
+            parsed = json.loads(content)
+            print(f"✅ Validation completed using {model}")
+            return parsed
         except json.JSONDecodeError:
+            print(f"⚠️ {model} returned invalid JSON")
             return {"passed": False, "failed_cases": [], "error": "Invalid JSON from model"}
 
     # Try primary model first
     try:
         return _ask_model(PRIMARY_MODEL)
     except Exception as e:
-        print(f"⚠️ Primary model failed: {e}. Falling back to {FALLBACK_MODEL}.")
+        print(f"⚠️ Primary model {PRIMARY_MODEL} failed: {e}. Falling back to {FALLBACK_MODEL}.")
         try:
             return _ask_model(FALLBACK_MODEL)
         except Exception as e2:
+            print(f"❌ Both models failed: {e2}")
             return {"passed": False, "failed_cases": [], "error": f"Both models failed: {str(e2)}"}
