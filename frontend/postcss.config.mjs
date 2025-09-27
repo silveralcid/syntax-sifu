@@ -1,7 +1,6 @@
-// frontend/postcss.config.mjs
 const config = {
   plugins: {
-    tailwindcss: {},
+    "@tailwindcss/postcss": {},
     autoprefixer: {},
   },
 };
