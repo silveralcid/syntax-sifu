@@ -4,6 +4,7 @@ import requests
 import os
 from typing import List, Dict, Any
 import json
+from app.core.config import OPENROUTER_API_KEY
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
