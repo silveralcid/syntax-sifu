@@ -9,3 +9,7 @@ services:
         sync: false
       - key: RATE_LIMIT_ENABLED
         sync: false
+      - key: RATE_LIMIT
+        sync: false
+      - key: RATE_LIMIT_WINDOW
+        sync: false
