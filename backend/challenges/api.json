@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "category": "api endpoints",
+    "prompt": "Write a GET endpoint `/ping` that returns `pong`. Congrats, you’ve basically built Google.",
+    "fn_name": "ping_endpoint",
+    "tests": [
+      {"input": [], "output": "pong"}
+    ],
+    "solutions": {
+      "python": "from fastapi import FastAPI\\napp = FastAPI()\\n@app.get('/ping')\\ndef ping():\\n    return 'pong'",
+      "javascript": "const express = require('express');\\nconst app = express();\\napp.get('/ping', (req, res) => res.send('pong'));",
+      "csharp": "app.MapGet('/ping', () => 'pong');"
+    }
+  },
+  {
+    "id": 2,
+    "category": "api endpoints",
+    "prompt": "Create a POST endpoint `/echo` that just repeats whatever JSON you send it. Revolutionary.",
+    "fn_name": "echo_endpoint",
+    "tests": [
+      {"input": [{ "msg": "hello" }], "output": { "msg": "hello" }}
+    ],
+    "solutions": {
+      "python": "from fastapi import FastAPI, Request\\napp = FastAPI()\\n@app.post('/echo')\\nasync def echo(req: Request):\\n    data = await req.json()\\n    return data",
+      "javascript": "const express = require('express');\\nconst app = express();\\napp.use(express.json());\\napp.post('/echo', (req, res) => res.json(req.body));",
+      "csharp": "app.MapPost('/echo', async (HttpRequest req) => await req.ReadFromJsonAsync<object>());"
+    }
+  },
+  {
+    "id": 3,
+    "category": "api endpoints",
+    "prompt": "Make a DELETE endpoint `/self` that responds with 'You can’t delete me, I’m inevitable'.",
+    "fn_name": "self_destruct",
+    "tests": [
+      {"input": [], "output": "You can’t delete me, I’m inevitable"}
+    ],
+    "solutions": {
+      "python": "from fastapi import FastAPI\\napp = FastAPI()\\n@app.delete('/self')\\ndef self_delete():\\n    return 'You can’t delete me, I’m inevitable'",
+      "javascript": "app.delete('/self', (req, res) => res.send('You can’t delete me, I’m inevitable'));",
+      "csharp": "app.MapDelete('/self', () => 'You can’t delete me, I’m inevitable');"
+    }
+  },
+  {
+    "id": 4,
+    "category": "api endpoints",
+    "prompt": "Write a GET endpoint `/time` that returns the current year. Because everyone loves boilerplate date APIs.",
+    "fn_name": "time_endpoint",
+    "tests": [
+      {"input": [], "output": 2025}
+    ],
+    "solutions": {
+      "python": "from datetime import datetime\\n@app.get('/time')\\ndef get_time():\\n    return datetime.now().year",
+      "javascript": "app.get('/time', (req, res) => res.json(new Date().getFullYear()));",
+      "csharp": "app.MapGet('/time', () => DateTime.Now.Year);"
+    }
+  },
+  {
+    "id": 5,
+    "category": "api endpoints",
+    "prompt": "Write a PUT endpoint `/status` that always returns `{ 'status': 'ok' }`. Truly groundbreaking work.",
+    "fn_name": "status_endpoint",
+    "tests": [
+      {"input": [], "output": { "status": "ok" }}
+    ],
+    "solutions": {
+      "python": "@app.put('/status')\\ndef status():\\n    return { 'status': 'ok' }",
+      "javascript": "app.put('/status', (req, res) => res.json({ status: 'ok' }));",
+      "csharp": "app.MapPut('/status', () => new { status = 'ok' });"
+    }
+  },
+  {
+    "id": 6,
+    "category": "api endpoints",
+    "prompt": "Write a GET endpoint `/greet/{name}` that says `Hello, NAME`. As if humanity needed more greetings.",
+    "fn_name": "greet",
+    "tests": [
+      {"input": ["Alice"], "output": "Hello, Alice"}
+    ],
+    "solutions": {
+      "python": "@app.get('/greet/{name}')\\ndef greet(name: str):\\n    return f'Hello, {name}'",
+      "javascript": "app.get('/greet/:name', (req, res) => res.send(`Hello, ${req.params.name}`));",
+      "csharp": "app.MapGet('/greet/{name}', (string name) => $'Hello, {name}');"
+    }
+  },
+  {
+    "id": 7,
+    "category": "api endpoints",
+    "prompt": "Write a GET endpoint `/math/add?a=1&b=2` that returns their sum. Groundbreaking calculator app.",
+    "fn_name": "math_add",
+    "tests": [
+      {"input": [1,2], "output": 3}
+    ],
+    "solutions": {
+      "python": "@app.get('/math/add')\\ndef add(a: int, b: int):\\n    return a + b",
+      "javascript": "app.get('/math/add', (req, res) => res.send(String(Number(req.query.a) + Number(req.query.b))));",
+      "csharp": "app.MapGet('/math/add', (int a, int b) => a + b);"
+    }
+  },
+  {
+    "id": 8,
+    "category": "api endpoints",
+    "prompt": "Make a GET endpoint `/headers` that returns all request headers. Privacy is overrated anyway.",
+    "fn_name": "headers_endpoint",
+    "tests": [
+      {"input": [], "output": {"example": "value"}}
+    ],
+    "solutions": {
+      "python": "from fastapi import Request\\n@app.get('/headers')\\nasync def headers(req: Request):\\n    return dict(req.headers)",
+      "javascript": "app.get('/headers', (req, res) => res.json(req.headers));",
+      "csharp": "app.MapGet('/headers', (HttpRequest req) => req.Headers.ToDictionary(k => k.Key, v => v.Value.ToString()));"
+    }
+  },
+  {
+    "id": 9,
+    "category": "api endpoints",
+    "prompt": "Write a GET endpoint `/health` that returns `{ 'status': 'alive' }`. Congratulations, you’ve made DevOps cry.",
+    "fn_name": "health_endpoint",
+    "tests": [
+      {"input": [], "output": { "status": "alive" }}
+    ],
+    "solutions": {
+      "python": "@app.get('/health')\\ndef health():\\n    return { 'status': 'alive' }",
+      "javascript": "app.get('/health', (req, res) => res.json({ status: 'alive' }));",
+      "csharp": "app.MapGet('/health', () => new { status = 'alive' });"
+    }
+  },
+  {
+    "id": 10,
+    "category": "api endpoints",
+    "prompt": "Write a GET endpoint `/version` that returns API version 'v1'. Because slapping versioning on it makes it 'enterprise'.",
+    "fn_name": "version_endpoint",
+    "tests": [
+      {"input": [], "output": "v1"}
+    ],
+    "solutions": {
+      "python": "@app.get('/version')\\ndef version():\\n    return 'v1'",
+      "javascript": "app.get('/version', (req, res) => res.send('v1'));",
+      "csharp": "app.MapGet('/version', () => 'v1');"
+    }
+  }
+]

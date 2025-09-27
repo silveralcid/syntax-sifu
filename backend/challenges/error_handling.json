@@ -1,0 +1,151 @@
+[
+  {
+    "id": 1,
+    "category": "error handling",
+    "prompt": "Write a function that divides two numbers, but if the denominator is zero return 'Nice try, Einstein'.",
+    "fn_name": "safe_divide",
+    "tests": [
+      {"input": [10, 2], "output": 5},
+      {"input": [5, 0], "output": "Nice try, Einstein"}
+    ],
+    "solutions": {
+      "python": "def safe_divide(a, b):\\n    try:\\n        return a / b\\n    except ZeroDivisionError:\\n        return 'Nice try, Einstein'",
+      "javascript": "function safe_divide(a, b) {\\n  try {\\n    if (b === 0) throw new Error('Nice try, Einstein');\\n    return a / b;\\n  } catch (e) {\\n    return e.message;\\n  }\\n}",
+      "csharp": "int SafeDivide(int a, int b) {\\n    try { return a / b; }\\n    catch (DivideByZeroException) { return -1; }\\n}"
+    }
+  },
+  {
+    "id": 2,
+    "category": "error handling",
+    "prompt": "Open a file. If it doesn’t exist, return 'File not found, just like your motivation'.",
+    "fn_name": "open_file",
+    "tests": [
+      {"input": ["input.txt"], "output": "dummy"},
+      {"input": ["missing.txt"], "output": "File not found, just like your motivation"}
+    ],
+    "solutions": {
+      "python": "def open_file(path):\\n    try:\\n        with open(path, 'r') as f:\\n            return f.read()\\n    except FileNotFoundError:\\n        return 'File not found, just like your motivation'",
+      "javascript": "const fs = require('fs');\\nfunction open_file(path) {\\n  try { return fs.readFileSync(path, 'utf8'); }\\n  catch { return 'File not found, just like your motivation'; }\\n}",
+      "csharp": "string OpenFile(string path) {\\n    try { return File.ReadAllText(path); }\\n    catch (FileNotFoundException) { return \"File not found, just like your motivation\"; }\\n}"
+    }
+  },
+  {
+    "id": 3,
+    "category": "error handling",
+    "prompt": "Convert a string to an integer. If it fails, return 'Not a number, genius'.",
+    "fn_name": "to_int",
+    "tests": [
+      {"input": ["123"], "output": 123},
+      {"input": ["abc"], "output": "Not a number, genius"}
+    ],
+    "solutions": {
+      "python": "def to_int(s):\\n    try:\\n        return int(s)\\n    except ValueError:\\n        return 'Not a number, genius'",
+      "javascript": "function to_int(s) {\\n  try {\\n    const n = parseInt(s);\\n    if (isNaN(n)) throw new Error('Not a number, genius');\\n    return n;\\n  } catch (e) { return e.message; }\\n}",
+      "csharp": "object ToInt(string s) {\\n    try { return int.Parse(s); }\\n    catch { return \"Not a number, genius\"; }\\n}"
+    }
+  },
+  {
+    "id": 4,
+    "category": "error handling",
+    "prompt": "Access the first element of a list. If it’s empty, return 'IndexError: your career path'.",
+    "fn_name": "first_element",
+    "tests": [
+      {"input": [[1,2,3]], "output": 1},
+      {"input": [[]], "output": "IndexError: your career path"}
+    ],
+    "solutions": {
+      "python": "def first_element(lst):\\n    try:\\n        return lst[0]\\n    except IndexError:\\n        return 'IndexError: your career path'",
+      "javascript": "function first_element(arr) {\\n  try {\\n    if (arr.length === 0) throw new Error('IndexError: your career path');\\n    return arr[0];\\n  } catch (e) { return e.message; }\\n}",
+      "csharp": "object FirstElement(List<int> arr) {\\n    try { return arr[0]; }\\n    catch (ArgumentOutOfRangeException) { return \"IndexError: your career path\"; }\\n}"
+    }
+  },
+  {
+    "id": 5,
+    "category": "error handling",
+    "prompt": "Write a function that parses JSON. If it fails, return 'That’s not JSON, that’s a cry for help'.",
+    "fn_name": "parse_json",
+    "tests": [
+      {"input": ["{\"key\": \"value\"}"], "output": {"key": "value"}},
+      {"input": ["not-json"], "output": "That’s not JSON, that’s a cry for help"}
+    ],
+    "solutions": {
+      "python": "import json\\ndef parse_json(s):\\n    try:\\n        return json.loads(s)\\n    except json.JSONDecodeError:\\n        return 'That’s not JSON, that’s a cry for help'",
+      "javascript": "function parse_json(s) {\\n  try { return JSON.parse(s); }\\n  catch { return 'That’s not JSON, that’s a cry for help'; }\\n}",
+      "csharp": "object ParseJson(string s) {\\n    try { return System.Text.Json.JsonSerializer.Deserialize<object>(s); }\\n    catch { return \"That’s not JSON, that’s a cry for help\"; }\\n}"
+    }
+  },
+  {
+    "id": 6,
+    "category": "error handling",
+    "prompt": "Fetch a dictionary key. If it doesn’t exist, return 'KeyError: your hopes and dreams'.",
+    "fn_name": "get_key",
+    "tests": [
+      {"input": [{"a": 1}, "a"], "output": 1},
+      {"input": [{"a": 1}, "b"], "output": "KeyError: your hopes and dreams"}
+    ],
+    "solutions": {
+      "python": "def get_key(d, k):\\n    try:\\n        return d[k]\\n    except KeyError:\\n        return 'KeyError: your hopes and dreams'",
+      "javascript": "function get_key(obj, key) {\\n  try {\\n    if (!(key in obj)) throw new Error('KeyError: your hopes and dreams');\\n    return obj[key];\\n  } catch (e) { return e.message; }\\n}",
+      "csharp": "object GetKey(Dictionary<string,int> d, string k) {\\n    try { return d[k]; }\\n    catch (KeyNotFoundException) { return \"KeyError: your hopes and dreams\"; }\\n}"
+    }
+  },
+  {
+    "id": 7,
+    "category": "error handling",
+    "prompt": "Cast a float to int. If input isn’t numeric, return 'TypeError: still not hireable'.",
+    "fn_name": "to_int_cast",
+    "tests": [
+      {"input": [3.7], "output": 3},
+      {"input": ["oops"], "output": "TypeError: still not hireable"}
+    ],
+    "solutions": {
+      "python": "def to_int_cast(x):\\n    try:\\n        return int(x)\\n    except Exception:\\n        return 'TypeError: still not hireable'",
+      "javascript": "function to_int_cast(x) {\\n  try {\\n    if (isNaN(Number(x))) throw new Error('TypeError: still not hireable');\\n    return parseInt(x);\\n  } catch (e) { return e.message; }\\n}",
+      "csharp": "object ToIntCast(object x) {\\n    try { return Convert.ToInt32(x); }\\n    catch { return \"TypeError: still not hireable\"; }\\n}"
+    }
+  },
+  {
+    "id": 8,
+    "category": "error handling",
+    "prompt": "Connect to a database (fake it). If connection fails, return 'DBError: like your startup'.",
+    "fn_name": "connect_db",
+    "tests": [
+      {"input": ["ok"], "output": "connected"},
+      {"input": ["fail"], "output": "DBError: like your startup"}
+    ],
+    "solutions": {
+      "python": "def connect_db(mode):\\n    try:\\n        if mode == 'fail': raise Exception()\\n        return 'connected'\\n    except Exception:\\n        return 'DBError: like your startup'",
+      "javascript": "function connect_db(mode) {\\n  try { if (mode === 'fail') throw new Error('DBError: like your startup'); return 'connected'; }\\n  catch (e) { return e.message; }\\n}",
+      "csharp": "string ConnectDb(string mode) {\\n    try { if (mode == \"fail\") throw new Exception(); return \"connected\"; }\\n    catch { return \"DBError: like your startup\"; }\\n}"
+    }
+  },
+  {
+    "id": 9,
+    "category": "error handling",
+    "prompt": "Simulate network request. If it times out, return 'TimeoutError: like your patience'.",
+    "fn_name": "fetch_url",
+    "tests": [
+      {"input": ["ok"], "output": "success"},
+      {"input": ["timeout"], "output": "TimeoutError: like your patience"}
+    ],
+    "solutions": {
+      "python": "def fetch_url(mode):\\n    try:\\n        if mode == 'timeout': raise TimeoutError()\\n        return 'success'\\n    except TimeoutError:\\n        return 'TimeoutError: like your patience'",
+      "javascript": "function fetch_url(mode) {\\n  try { if (mode === 'timeout') throw new Error('TimeoutError: like your patience'); return 'success'; }\\n  catch (e) { return e.message; }\\n}",
+      "csharp": "string FetchUrl(string mode) {\\n    try { if (mode == \"timeout\") throw new TimeoutException(); return \"success\"; }\\n    catch (TimeoutException) { return \"TimeoutError: like your patience\"; }\\n}"
+    }
+  },
+  {
+    "id": 10,
+    "category": "error handling",
+    "prompt": "Wrap literally any function in a try/except and return 'Handled'. Because managers love the word 'resilient'.",
+    "fn_name": "wrap_safe",
+    "tests": [
+      {"input": [1], "output": "Handled"}
+    ],
+    "solutions": {
+      "python": "def wrap_safe(x):\\n    try:\\n        _ = 1/0 if x == 0 else 1\\n        return 'Handled'\\n    except Exception:\\n        return 'Handled'",
+      "javascript": "function wrap_safe(x) {\\n  try { if (x === 0) throw new Error(); return 'Handled'; } catch { return 'Handled'; } }",
+      "csharp": "string WrapSafe(int x) {\\n    try { if (x == 0) throw new Exception(); return \"Handled\"; }\\n    catch { return \"Handled\"; }\\n}"
+    }
+  }
+]
