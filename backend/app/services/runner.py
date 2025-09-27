@@ -6,14 +6,24 @@ from typing import List, Dict, Any
 import json
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
-PRIMARY_MODEL = "qwen/qwen3-coder:free"
-FALLBACK_MODEL = "deepseek/deepseek-r1-0528:free"
+# Priority list of models: best → fallback
+MODEL_CHAIN = [
+    "qwen/qwen3-coder:free",             # best for code
+    "deepseek/deepseek-r1:free",         # reasoning + coding
+    "deepseek/deepseek-r1-0528:free",    # alt DeepSeek R1
+    "deepseek/deepseek-chat-v3.1:free",  # chat fallback
+    "qwen/qwen3-235b-a22b:free",         # massive Qwen model
+    "google/gemini-2.0-flash-exp:free",  # fast & decent
+    "meta-llama/llama-3.3-70b-instruct:free"  # strong generalist
+]
+
 
 def run_code(language: str, code: str, fn_name: str, tests: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
-    Validate user code using OpenRouter's Qwen3 Coder model.
-    Falls back to DeepSeek R1 if primary model fails.
+    Validate user code using OpenRouter LLMs.
+    Tries models in MODEL_CHAIN order until one succeeds.
     Returns structured results: passed/failed cases, errors.
     """
 
@@ -52,7 +62,7 @@ Return ONLY valid JSON in this format:
         }
 
         r = requests.post(
-            "https://openrouter.ai/api/v1/chat/completions",
+            OPENROUTER_URL,
             headers=headers,
             json=body,
             timeout=30
@@ -64,18 +74,21 @@ Return ONLY valid JSON in this format:
         try:
             parsed = json.loads(content)
             print(f"✅ Validation completed using {model}")
+            parsed["_model"] = model  # attach model info
             return parsed
         except json.JSONDecodeError:
             print(f"⚠️ {model} returned invalid JSON")
-            return {"passed": False, "failed_cases": [], "error": "Invalid JSON from model"}
+            return {"passed": False, "failed_cases": [], "error": "Invalid JSON from model", "_model": model}
 
-    # Try primary model first
-    try:
-        return _ask_model(PRIMARY_MODEL)
-    except Exception as e:
-        print(f"⚠️ Primary model {PRIMARY_MODEL} failed: {e}. Falling back to {FALLBACK_MODEL}.")
+    last_error = None
+
+    for model in MODEL_CHAIN:
         try:
-            return _ask_model(FALLBACK_MODEL)
-        except Exception as e2:
-            print(f"❌ Both models failed: {e2}")
-            return {"passed": False, "failed_cases": [], "error": f"Both models failed: {str(e2)}"}
+            return _ask_model(model)
+        except Exception as e:
+            print(f"⚠️ Model {model} failed: {e}")
+            last_error = str(e)
+            continue
+
+    print("❌ All models failed.")
+    return {"passed": False, "failed_cases": [], "error": f"All models failed. Last error: {last_error}"}
