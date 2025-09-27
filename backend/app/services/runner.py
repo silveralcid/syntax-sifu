@@ -1,11 +1,12 @@
-# backend/app/services/runner.py
-
 import requests
 import os
-from typing import List, Dict, Any
+import time
 import json
+from typing import List, Dict, Any
+
 from app.core.config import OPENROUTER_API_KEY
 from app.core.logger import logger
+from app.services.prompt import build_prompt
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -13,43 +14,19 @@ OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL_CHAIN = [
     "qwen/qwen3-coder:free",             # best for code
     "deepseek/deepseek-r1:free",         # reasoning + coding
-    "deepseek/deepseek-r1-0528:free",    # alt DeepSeek R1
-    "deepseek/deepseek-chat-v3.1:free",  # chat fallback
-    "qwen/qwen3-235b-a22b:free",         # massive Qwen model
     "google/gemini-2.0-flash-exp:free",  # fast & decent
-    "meta-llama/llama-3.3-70b-instruct:free"  # strong generalist
+    "google/gemini-2.5-flash-lite"       # paid fallback
 ]
 
 
-def run_code(language: str, code: str, fn_name: str, tests: List[Dict[str, Any]]) -> Dict[str, Any]:
+def run_code(language: str, code: str, fn_name: str, tests: List[Dict[str, Any]], challenge_prompt: str = "") -> Dict[str, Any]:
     """
     Validate user code using OpenRouter LLMs.
-    Tries models in MODEL_CHAIN order until one succeeds.
-    Returns structured results: passed/failed cases, errors.
+    Tries models in MODEL_CHAIN order with exponential backoff between failures.
     """
 
     def _ask_model(model: str) -> Dict[str, Any]:
-        prompt = f"""
-You are a strict code validator. The user wrote this code in {language}:
-
-```{language}
-{code}
-```
-
-The function should be named {fn_name}.
-Run the following test cases mentally and check correctness:
-
-{tests}
-
-Return ONLY valid JSON in this format:
-{{
-  "passed": true/false,
-  "failed_cases": [
-    {{"input": ..., "expected": ..., "got": ...}}
-  ],
-  "error": null or string
-}}
-"""
+        prompt = build_prompt(language, code, fn_name, tests, challenge_prompt)
 
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
@@ -77,6 +54,19 @@ Return ONLY valid JSON in this format:
         content = r.json()["choices"][0]["message"]["content"].strip()
         logger.debug(f"📩 Raw response from {model}: {content[:200]}...")
 
+        # 🔹 Clean markdown fences like ```json ... ```
+        if content.startswith("```"):
+            lines = content.splitlines()
+            # drop first and last if they are fences
+            if lines[0].startswith("```"):
+                lines = lines[1:]
+            if lines and lines[-1].startswith("```"):
+                lines = lines[:-1]
+            content = "\n".join(lines).strip()
+            # remove "json" prefix if present
+            if content.lower().startswith("json"):
+                content = content[4:].strip()
+
         try:
             parsed = json.loads(content)
             parsed["_model"] = model
@@ -88,18 +78,23 @@ Return ONLY valid JSON in this format:
                 "passed": False,
                 "failed_cases": [],
                 "error": "Invalid JSON from model",
-                "_model": model
+                "_model": model,
+                "_raw": content  # 👈 keep raw for debugging
             }
 
     last_error = None
 
-    for model in MODEL_CHAIN:
+    for attempt, model in enumerate(MODEL_CHAIN):
         try:
             return _ask_model(model)
         except Exception as e:
             logger.warning(f"⚠️ Model {model} failed: {e}")
             last_error = str(e)
-            continue
+
+            # Exponential backoff before trying next model
+            delay = min(2 ** attempt, 10)  # cap at 10s
+            logger.debug(f"⏳ Waiting {delay}s before trying next model...")
+            time.sleep(delay)
 
     logger.error(f"❌ All models failed. Last error: {last_error}")
     return {

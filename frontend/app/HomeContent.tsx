@@ -36,6 +36,7 @@ export default function Home() {
   const [language, setLanguage] = useState<"python" | "javascript" | "csharp">(
     "python"
   );
+  const [isRunning, setIsRunning] = useState(false); // 👈 new state
 
   // Timer state
   const [timeLeft, setTimeLeft] = useState(300);
@@ -50,7 +51,7 @@ export default function Home() {
       .catch((err) => console.error("Error fetching categories:", err));
   }, []);
 
-// Timer effect
+  // Timer effect
   useEffect(() => {
     if (isPaused || timeLeft <= 0) return;
 
@@ -58,12 +59,10 @@ export default function Home() {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
-    // cleanup function
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [isPaused, timeLeft]);
-
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -96,6 +95,8 @@ export default function Home() {
   const handleRunCode = async () => {
     if (!currentChallenge) return;
     setIsPaused(true);
+    setIsRunning(true); // 👈 start loading
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/submit_code/`,
@@ -107,6 +108,7 @@ export default function Home() {
             fn_name: currentChallenge.fn_name,
             language,
             tests: currentChallenge.tests,
+            prompt: currentChallenge.prompt,
           }),
         }
       );
@@ -114,6 +116,8 @@ export default function Home() {
       setResult(data);
     } catch (err) {
       console.error("Error submitting code:", err);
+    } finally {
+      setIsRunning(false); // 👈 stop loading
     }
   };
 
@@ -133,6 +137,7 @@ export default function Home() {
       setIsPaused(false);
     }
   };
+
   const prevChallenge = () => {
     if (currentIndex > 0) {
       setCurrentIndex((i) => i - 1);
@@ -242,9 +247,9 @@ export default function Home() {
         <button
           style={{ padding: "6px 12px", border: "1px solid #ccc", borderRadius: "4px" }}
           onClick={handleRunCode}
-          disabled={!currentChallenge}
+          disabled={!currentChallenge || isRunning}
         >
-          Run Code
+          {isRunning ? "Running..." : "Run Code"}
         </button>
         <button
           style={{ padding: "6px 12px", border: "1px solid #ccc", borderRadius: "4px" }}
@@ -258,7 +263,9 @@ export default function Home() {
       {/* Results */}
       <div>
         <h2>Results:</h2>
-        {result ? (
+        {isRunning ? (
+          <p>⏳ Processing your code...</p>
+        ) : result ? (
           <pre>{JSON.stringify(result, null, 2)}</pre>
         ) : (
           <p>No submission yet.</p>

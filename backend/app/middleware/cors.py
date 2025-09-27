@@ -7,7 +7,8 @@ def add_cors(app):
         CORSMiddleware,
         allow_origins=[
             "https://syntax-sifu.vercel.app",
-            "https://www.syntaxsifu.com"
+            "https://www.syntaxsifu.com",
+            "http://172.21.144.1:3000",
             "http://localhost:3000"
         ],
         allow_credentials=True,
