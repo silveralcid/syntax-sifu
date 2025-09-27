@@ -50,15 +50,20 @@ export default function Home() {
       .catch((err) => console.error("Error fetching categories:", err));
   }, []);
 
-  // Timer effect
+// Timer effect
   useEffect(() => {
     if (isPaused || timeLeft <= 0) return;
-    timerRef.current = setInterval(
-      () => setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0)),
-      1000
-    );
-    return () => timerRef.current && clearInterval(timerRef.current);
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    // cleanup function
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [isPaused, timeLeft]);
+
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
