@@ -1,0 +1,144 @@
+[
+  {
+    "id": 1,
+    "category": "math",
+    "prompt": "Return n squared. Because apparently this is still an interview question in 2025.",
+    "fn_name": "square",
+    "tests": [
+      {"input": [4], "output": 16}
+    ],
+    "solutions": {
+      "python": "def square(n):\n    return n*n",
+      "javascript": "function square(n){ return n*n; }",
+      "csharp": "int Square(int n){ return n*n; }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "math",
+    "prompt": "Check if n is prime. Just like job listings, most numbers aren’t special.",
+    "fn_name": "is_prime",
+    "tests": [
+      {"input": [7], "output": true},
+      {"input": [8], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_prime(n):\n    if n<2: return False\n    for i in range(2,int(n**0.5)+1):\n        if n%i==0: return False\n    return True",
+      "javascript": "function isPrime(n){ if(n<2)return false; for(let i=2;i<=Math.sqrt(n);i++){ if(n%i===0) return false; } return true; }",
+      "csharp": "bool IsPrime(int n){ if(n<2)return false; for(int i=2;i*i<=n;i++){ if(n%i==0)return false; } return true; }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "math",
+    "prompt": "Return factorial of n. Because loops weren’t boring enough.",
+    "fn_name": "factorial",
+    "tests": [
+      {"input": [5], "output": 120}
+    ],
+    "solutions": {
+      "python": "def factorial(n):\n    res=1\n    for i in range(1,n+1): res*=i\n    return res",
+      "javascript": "function factorial(n){ let res=1; for(let i=1;i<=n;i++){ res*=i; } return res; }",
+      "csharp": "int Factorial(int n){ int res=1; for(int i=1;i<=n;i++){ res*=i; } return res; }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "math",
+    "prompt": "Return sum of digits of n. Like summing your student loans.",
+    "fn_name": "sum_digits",
+    "tests": [
+      {"input": [123], "output": 6}
+    ],
+    "solutions": {
+      "python": "def sum_digits(n):\n    return sum(int(d) for d in str(n))",
+      "javascript": "function sumDigits(n){ return n.toString().split('').reduce((a,b)=>a+ +b,0); }",
+      "csharp": "int SumDigits(int n){ return n.ToString().Sum(c=>c-'0'); }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "math",
+    "prompt": "Return greatest common divisor (GCD) of a and b. Because your parents expect you to be the greatest too.",
+    "fn_name": "gcd",
+    "tests": [
+      {"input": [12,18], "output": 6}
+    ],
+    "solutions": {
+      "python": "import math\ndef gcd(a,b):\n    return math.gcd(a,b)",
+      "javascript": "function gcd(a,b){ while(b){ [a,b]=[b,a%b]; } return a; }",
+      "csharp": "int Gcd(int a,int b){ while(b!=0){ int t=b; b=a%b; a=t; } return a; }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "math",
+    "prompt": "Return least common multiple (LCM) of a and b. Like your team meetings: endlessly recurring.",
+    "fn_name": "lcm",
+    "tests": [
+      {"input": [4,6], "output": 12}
+    ],
+    "solutions": {
+      "python": "import math\ndef lcm(a,b):\n    return abs(a*b)//math.gcd(a,b)",
+      "javascript": "function lcm(a,b){ const gcd=(x,y)=>y?gcd(y,x%y):x; return Math.abs(a*b)/gcd(a,b); }",
+      "csharp": "int Lcm(int a,int b){ int gcd=Gcd(a,b); return Math.Abs(a*b)/gcd; }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "math",
+    "prompt": "Check if n is a perfect square. Like your GPA, probably not.",
+    "fn_name": "is_square",
+    "tests": [
+      {"input": [16], "output": true},
+      {"input": [20], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_square(n):\n    return int(n**0.5)**2==n",
+      "javascript": "function isSquare(n){ return Number.isInteger(Math.sqrt(n)); }",
+      "csharp": "bool IsSquare(int n){ int r=(int)Math.Sqrt(n); return r*r==n; }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "math",
+    "prompt": "Return nth Fibonacci number. Like job rejections, it just keeps coming.",
+    "fn_name": "fibonacci",
+    "tests": [
+      {"input": [7], "output": 13}
+    ],
+    "solutions": {
+      "python": "def fibonacci(n):\n    a,b=0,1\n    for _ in range(n): a,b=b,a+b\n    return a",
+      "javascript": "function fibonacci(n){ let a=0,b=1; for(let i=0;i<n;i++){ [a,b]=[b,a+b]; } return a; }",
+      "csharp": "int Fibonacci(int n){ int a=0,b=1; for(int i=0;i<n;i++){ int t=a; a=b; b=t+b; } return a; }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "math",
+    "prompt": "Return absolute value of n. Like your debt, always positive.",
+    "fn_name": "absolute",
+    "tests": [
+      {"input": [-5], "output": 5}
+    ],
+    "solutions": {
+      "python": "def absolute(n):\n    return abs(n)",
+      "javascript": "function absolute(n){ return Math.abs(n); }",
+      "csharp": "int Absolute(int n){ return Math.Abs(n); }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "math",
+    "prompt": "Return power a^b. Because clearly we all need more power… just not you at work.",
+    "fn_name": "power",
+    "tests": [
+      {"input": [2,3], "output": 8}
+    ],
+    "solutions": {
+      "python": "def power(a,b):\n    return a**b",
+      "javascript": "function power(a,b){ return a**b; }",
+      "csharp": "int Power(int a,int b){ return (int)Math.Pow(a,b); }"
+    }
+  }
+]

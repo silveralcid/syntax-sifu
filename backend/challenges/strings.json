@@ -1,0 +1,144 @@
+[
+  {
+    "id": 1,
+    "category": "strings",
+    "prompt": "Reverse a string. Congrats, you’re back in 2005 interview hell.",
+    "fn_name": "reverse_string",
+    "tests": [
+      {"input": ["abc"], "output": "cba"},
+      {"input": ["racecar"], "output": "racecar"}
+    ],
+    "solutions": {
+      "python": "def reverse_string(s):\n    return s[::-1]",
+      "javascript": "function reverseString(s){ return s.split('').reverse().join(''); }",
+      "csharp": "string ReverseString(string s){ return new string(s.Reverse().ToArray()); }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "strings",
+    "prompt": "Make everything ALL CAPS, because subtlety is dead.",
+    "fn_name": "yell",
+    "tests": [
+      {"input": ["hello"], "output": "HELLO"}
+    ],
+    "solutions": {
+      "python": "def yell(s):\n    return s.upper()",
+      "javascript": "function yell(s){ return s.toUpperCase(); }",
+      "csharp": "string Yell(string s){ return s.ToUpper(); }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "strings",
+    "prompt": "Return the first character. Play favorites, like recruiters.",
+    "fn_name": "first_char",
+    "tests": [
+      {"input": ["hello"], "output": "h"}
+    ],
+    "solutions": {
+      "python": "def first_char(s):\n    return s[0]",
+      "javascript": "function firstChar(s){ return s[0]; }",
+      "csharp": "string FirstChar(string s){ return s.Substring(0,1); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "strings",
+    "prompt": "Check if string is a palindrome. Sadly, your job search is not symmetrical.",
+    "fn_name": "is_palindrome",
+    "tests": [
+      {"input": ["racecar"], "output": true},
+      {"input": ["hello"], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_palindrome(s):\n    return s==s[::-1]",
+      "javascript": "function isPalindrome(s){ return s===s.split('').reverse().join(''); }",
+      "csharp": "bool IsPalindrome(string s){ return s==new string(s.Reverse().ToArray()); }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "strings",
+    "prompt": "Count vowels in a string. More vowels than job offers.",
+    "fn_name": "count_vowels",
+    "tests": [
+      {"input": ["hello"], "output": 2}
+    ],
+    "solutions": {
+      "python": "def count_vowels(s):\n    return sum(c in 'aeiouAEIOU' for c in s)",
+      "javascript": "function countVowels(s){ return (s.match(/[aeiou]/gi)||[]).length; }",
+      "csharp": "int CountVowels(string s){ return s.Count(c=>\"aeiouAEIOU\".Contains(c)); }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "strings",
+    "prompt": "Replace spaces with underscores. Fake productivity achieved.",
+    "fn_name": "underscore_spaces",
+    "tests": [
+      {"input": ["hello world"], "output": "hello_world"}
+    ],
+    "solutions": {
+      "python": "def underscore_spaces(s):\n    return s.replace(' ','_')",
+      "javascript": "function underscoreSpaces(s){ return s.replace(/ /g,'_'); }",
+      "csharp": "string UnderscoreSpaces(string s){ return s.Replace(\" \",\"_\"); }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "strings",
+    "prompt": "Repeat string n times. Like you repeating 'I’ll get a job soon' to your parents.",
+    "fn_name": "repeat_string",
+    "tests": [
+      {"input": ["ha",3], "output": "hahaha"}
+    ],
+    "solutions": {
+      "python": "def repeat_string(s,n):\n    return s*n",
+      "javascript": "function repeatString(s,n){ return s.repeat(n); }",
+      "csharp": "string RepeatString(string s,int n){ return string.Concat(Enumerable.Repeat(s,n)); }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "strings",
+    "prompt": "Concatenate two strings. Almost teamwork, but with less HR paperwork.",
+    "fn_name": "concat_strings",
+    "tests": [
+      {"input": ["foo","bar"], "output": "foobar"}
+    ],
+    "solutions": {
+      "python": "def concat_strings(a,b):\n    return a+b",
+      "javascript": "function concatStrings(a,b){ return a+b; }",
+      "csharp": "string ConcatStrings(string a,string b){ return a+b; }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "strings",
+    "prompt": "Get length of a string. Yes, size matters. Ask Big Tech job postings.",
+    "fn_name": "string_length",
+    "tests": [
+      {"input": ["hello"], "output": 5}
+    ],
+    "solutions": {
+      "python": "def string_length(s):\n    return len(s)",
+      "javascript": "function stringLength(s){ return s.length; }",
+      "csharp": "int StringLength(string s){ return s.Length; }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "strings",
+    "prompt": "Replace all vowels with '*'. Like your hopes, censored.",
+    "fn_name": "censor_vowels",
+    "tests": [
+      {"input": ["hello"], "output": "h*ll*"}
+    ],
+    "solutions": {
+      "python": "def censor_vowels(s):\n    return ''.join('*' if c in 'aeiouAEIOU' else c for c in s)",
+      "javascript": "function censorVowels(s){ return s.replace(/[aeiouAEIOU]/g,'*'); }",
+      "csharp": "string CensorVowels(string s){ return Regex.Replace(s, \"[aeiouAEIOU]\", \"*\"); }"
+    }
+  }
+]

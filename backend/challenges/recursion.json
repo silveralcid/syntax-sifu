@@ -1,0 +1,144 @@
+[
+  {
+    "id": 1,
+    "category": "recursion",
+    "prompt": "Write factorial(n). It’ll blow up past 1000, kind of like your career expectations.",
+    "fn_name": "factorial",
+    "tests": [
+      {"input": [5], "output": 120}
+    ],
+    "solutions": {
+      "python": "def factorial(n):\n    return 1 if n==0 else n*factorial(n-1)",
+      "javascript": "function factorial(n){ return n===0?1:n*factorial(n-1); }",
+      "csharp": "int Factorial(int n){ return n==0?1:n*Factorial(n-1); }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "recursion",
+    "prompt": "Sum a list recursively. Loops are for cowards.",
+    "fn_name": "sum_list",
+    "tests": [
+      {"input": [[1,2,3]], "output": 6}
+    ],
+    "solutions": {
+      "python": "def sum_list(lst):\n    if not lst: return 0\n    return lst[0]+sum_list(lst[1:])",
+      "javascript": "function sumList(lst){ if(lst.length===0) return 0; return lst[0]+sumList(lst.slice(1)); }",
+      "csharp": "int SumList(List<int> lst){ if(lst.Count==0) return 0; var first=lst[0]; return first+SumList(lst.Skip(1).ToList()); }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "recursion",
+    "prompt": "Fibonacci(n). Because repeating pain is the tech industry’s business model.",
+    "fn_name": "fibonacci",
+    "tests": [
+      {"input": [7], "output": 13}
+    ],
+    "solutions": {
+      "python": "def fibonacci(n):\n    if n<=1: return n\n    return fibonacci(n-1)+fibonacci(n-2)",
+      "javascript": "function fibonacci(n){ if(n<=1) return n; return fibonacci(n-1)+fibonacci(n-2); }",
+      "csharp": "int Fibonacci(int n){ if(n<=1) return n; return Fibonacci(n-1)+Fibonacci(n-2); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "recursion",
+    "prompt": "Find max in a list recursively. Spoiler: not you.",
+    "fn_name": "max_recursive",
+    "tests": [
+      {"input": [[3,7,2]], "output": 7}
+    ],
+    "solutions": {
+      "python": "def max_recursive(lst):\n    if len(lst)==1: return lst[0]\n    return max(lst[0], max_recursive(lst[1:]))",
+      "javascript": "function maxRecursive(lst){ if(lst.length===1) return lst[0]; return Math.max(lst[0], maxRecursive(lst.slice(1))); }",
+      "csharp": "int MaxRecursive(List<int> lst){ if(lst.Count==1) return lst[0]; return Math.Max(lst[0], MaxRecursive(lst.Skip(1).ToList())); }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "recursion",
+    "prompt": "Check if a string is a palindrome recursively. Like your daily routine: sad and repetitive.",
+    "fn_name": "is_palindrome",
+    "tests": [
+      {"input": ["racecar"], "output": true},
+      {"input": ["hello"], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_palindrome(s):\n    if len(s)<=1: return True\n    return s[0]==s[-1] and is_palindrome(s[1:-1])",
+      "javascript": "function isPalindrome(s){ if(s.length<=1) return true; return s[0]===s[s.length-1] && isPalindrome(s.slice(1,-1)); }",
+      "csharp": "bool IsPalindrome(string s){ if(s.Length<=1) return true; return s[0]==s[s.Length-1] && IsPalindrome(s.Substring(1,s.Length-2)); }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "recursion",
+    "prompt": "Binary search recursively. Like your job hunt: divide and conquer, mostly divide.",
+    "fn_name": "binary_search",
+    "tests": [
+      {"input": [[1,2,3,4,5],3], "output": true},
+      {"input": [[1,2,3,4,5],6], "output": false}
+    ],
+    "solutions": {
+      "python": "def binary_search(lst,target):\n    if not lst: return False\n    mid=len(lst)//2\n    if lst[mid]==target: return True\n    if target<lst[mid]: return binary_search(lst[:mid],target)\n    return binary_search(lst[mid+1:],target)",
+      "javascript": "function binarySearch(lst,target){ if(lst.length===0) return false; let mid=Math.floor(lst.length/2); if(lst[mid]===target) return true; if(target<lst[mid]) return binarySearch(lst.slice(0,mid),target); return binarySearch(lst.slice(mid+1),target); }",
+      "csharp": "bool BinarySearch(List<int> lst,int target){ if(lst.Count==0) return false; int mid=lst.Count/2; if(lst[mid]==target) return true; if(target<lst[mid]) return BinarySearch(lst.GetRange(0,mid),target); return BinarySearch(lst.GetRange(mid+1,lst.Count-mid-1),target); }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "recursion",
+    "prompt": "Reverse a string recursively. Because loops are too mainstream.",
+    "fn_name": "reverse_string",
+    "tests": [
+      {"input": ["abc"], "output": "cba"}
+    ],
+    "solutions": {
+      "python": "def reverse_string(s):\n    if len(s)==0: return s\n    return reverse_string(s[1:])+s[0]",
+      "javascript": "function reverseString(s){ if(s.length===0) return s; return reverseString(s.slice(1))+s[0]; }",
+      "csharp": "string ReverseString(string s){ if(s.Length==0) return s; return ReverseString(s.Substring(1))+s[0]; }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "recursion",
+    "prompt": "Compute n^k recursively. Too bad it won’t raise your salary.",
+    "fn_name": "power_recursive",
+    "tests": [
+      {"input": [2,3], "output": 8}
+    ],
+    "solutions": {
+      "python": "def power_recursive(n,k):\n    if k==0: return 1\n    return n*power_recursive(n,k-1)",
+      "javascript": "function powerRecursive(n,k){ if(k===0) return 1; return n*powerRecursive(n,k-1); }",
+      "csharp": "int PowerRecursive(int n,int k){ if(k==0) return 1; return n*PowerRecursive(n,k-1); }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "recursion",
+    "prompt": "Flatten a nested list recursively. Like crushing your hopes layer by layer.",
+    "fn_name": "flatten_recursive",
+    "tests": [
+      {"input": [[[1,[2]],3]], "output": [1,2,3]}
+    ],
+    "solutions": {
+      "python": "def flatten_recursive(lst):\n    res=[]\n    for x in lst:\n        if isinstance(x,list): res+=flatten_recursive(x)\n        else: res.append(x)\n    return res",
+      "javascript": "function flattenRecursive(lst){ let res=[]; for(let x of lst){ if(Array.isArray(x)) res=res.concat(flattenRecursive(x)); else res.push(x); } return res; }",
+      "csharp": "List<int> FlattenRecursive(object lst){ var res=new List<int>(); foreach(var x in (IEnumerable)lst){ if(x is IEnumerable sub && !(x is string)) res.AddRange(FlattenRecursive(sub)); else res.Add((int)x); } return res; }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "recursion",
+    "prompt": "Print numbers from n down to 1 recursively. Each call like another rejection email.",
+    "fn_name": "countdown_recursive",
+    "tests": [
+      {"input": [3], "output": [3,2,1]}
+    ],
+    "solutions": {
+      "python": "def countdown_recursive(n):\n    if n==0: return []\n    return [n]+countdown_recursive(n-1)",
+      "javascript": "function countdownRecursive(n){ if(n===0) return []; return [n].concat(countdownRecursive(n-1)); }",
+      "csharp": "List<int> CountdownRecursive(int n){ if(n==0) return new List<int>(); var res=new List<int>{n}; res.AddRange(CountdownRecursive(n-1)); return res; }"
+    }
+  }
+]

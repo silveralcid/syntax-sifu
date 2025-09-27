@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "category": "loops",
+    "prompt": "Print numbers 1 through n. Riveting. Like your job applications.",
+    "fn_name": "count_up",
+    "tests": [
+      {"input": [5], "output": [1,2,3,4,5]}
+    ],
+    "solutions": {
+      "python": "def count_up(n):\n    return [i for i in range(1,n+1)]",
+      "javascript": "function countUp(n){ let res=[]; for(let i=1;i<=n;i++){res.push(i);} return res; }",
+      "csharp": "List<int> CountUp(int n){ return Enumerable.Range(1,n).ToList(); }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "loops",
+    "prompt": "Countdown from n to 0, like your motivation.",
+    "fn_name": "count_down",
+    "tests": [
+      {"input": [3], "output": [3,2,1,0]}
+    ],
+    "solutions": {
+      "python": "def count_down(n):\n    return [i for i in range(n,-1,-1)]",
+      "javascript": "function countDown(n){ let res=[]; for(let i=n;i>=0;i--){res.push(i);} return res; }",
+      "csharp": "List<int> CountDown(int n){ var res=new List<int>(); for(int i=n;i>=0;i--){ res.Add(i);} return res; }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "loops",
+    "prompt": "Sum numbers 1 to n. Groundbreaking. Still won’t pay rent.",
+    "fn_name": "sum_to_n",
+    "tests": [
+      {"input": [5], "output": 15}
+    ],
+    "solutions": {
+      "python": "def sum_to_n(n):\n    return sum(range(1,n+1))",
+      "javascript": "function sumToN(n){ let s=0; for(let i=1;i<=n;i++){ s+=i; } return s; }",
+      "csharp": "int SumToN(int n){ return Enumerable.Range(1,n).Sum(); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "loops",
+    "prompt": "Print a string n times. Practice for spamming recruiters.",
+    "fn_name": "repeat_string",
+    "tests": [
+      {"input": ["hi",3], "output": ["hi","hi","hi"]}
+    ],
+    "solutions": {
+      "python": "def repeat_string(s,n):\n    return [s]*n",
+      "javascript": "function repeatString(s,n){ return Array(n).fill(s); }",
+      "csharp": "List<string> RepeatString(string s,int n){ return Enumerable.Repeat(s,n).ToList(); }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "loops",
+    "prompt": "Return even numbers up to n. Like interviews, you’ll get every other one wrong.",
+    "fn_name": "evens_up_to_n",
+    "tests": [
+      {"input": [6], "output": [2,4,6]}
+    ],
+    "solutions": {
+      "python": "def evens_up_to_n(n):\n    return [i for i in range(2,n+1,2)]",
+      "javascript": "function evensUpToN(n){ let res=[]; for(let i=2;i<=n;i+=2){res.push(i);} return res; }",
+      "csharp": "List<int> EvensUpToN(int n){ return Enumerable.Range(1,n).Where(x=>x%2==0).ToList(); }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "loops",
+    "prompt": "Return odd numbers up to n. Still more useful than your CS degree.",
+    "fn_name": "odds_up_to_n",
+    "tests": [
+      {"input": [5], "output": [1,3,5]}
+    ],
+    "solutions": {
+      "python": "def odds_up_to_n(n):\n    return [i for i in range(1,n+1,2)]",
+      "javascript": "function oddsUpToN(n){ let res=[]; for(let i=1;i<=n;i+=2){res.push(i);} return res; }",
+      "csharp": "List<int> OddsUpToN(int n){ return Enumerable.Range(1,n).Where(x=>x%2==1).ToList(); }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "loops",
+    "prompt": "Multiply all numbers in a list. Unlike your salary, product is growing.",
+    "fn_name": "product_list",
+    "tests": [
+      {"input": [[1,2,3,4]], "output": 24}
+    ],
+    "solutions": {
+      "python": "import math\ndef product_list(lst):\n    return math.prod(lst)",
+      "javascript": "function productList(lst){ return lst.reduce((a,b)=>a*b,1); }",
+      "csharp": "int ProductList(List<int> lst){ return lst.Aggregate(1,(a,b)=>a*b); }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "loops",
+    "prompt": "Return a multiplication table for n up to 10. Welcome to tutoring middle school math for beer money.",
+    "fn_name": "times_table",
+    "tests": [
+      {"input": [3], "output": [3,6,9,12,15,18,21,24,27,30]}
+    ],
+    "solutions": {
+      "python": "def times_table(n):\n    return [n*i for i in range(1,11)]",
+      "javascript": "function timesTable(n){ let res=[]; for(let i=1;i<=10;i++){ res.push(n*i); } return res; }",
+      "csharp": "List<int> TimesTable(int n){ return Enumerable.Range(1,10).Select(i=>n*i).ToList(); }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "loops",
+    "prompt": "Flatten a nested list one level deep. Because life is already flat.",
+    "fn_name": "flatten",
+    "tests": [
+      {"input": [[[1,2],[3,4]]], "output": [1,2,3,4]}
+    ],
+    "solutions": {
+      "python": "def flatten(lst):\n    return [x for sub in lst for x in sub]",
+      "javascript": "function flatten(lst){ return [].concat(...lst); }",
+      "csharp": "List<int> Flatten(List<List<int>> lst){ return lst.SelectMany(x=>x).ToList(); }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "loops",
+    "prompt": "Count down n times yelling 'apply online'. Perfect practice for LinkedIn spam.",
+    "fn_name": "apply_spam",
+    "tests": [
+      {"input": [3], "output": ["apply online","apply online","apply online"]}
+    ],
+    "solutions": {
+      "python": "def apply_spam(n):\n    return ['apply online']*n",
+      "javascript": "function applySpam(n){ return Array(n).fill('apply online'); }",
+      "csharp": "List<string> ApplySpam(int n){ return Enumerable.Repeat(\"apply online\", n).ToList(); }"
+    }
+  }
+]

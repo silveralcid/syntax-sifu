@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "category": "dates",
+    "prompt": "Return the current year. Pretend you care about calendars.",
+    "fn_name": "current_year",
+    "tests": [
+      {"input": [], "output": 2025}
+    ],
+    "solutions": {
+      "python": "import datetime\ndef current_year():\n    return datetime.datetime.now().year",
+      "javascript": "function currentYear(){ return new Date().getFullYear(); }",
+      "csharp": "int CurrentYear(){ return System.DateTime.Now.Year; }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "dates",
+    "prompt": "Return true if today is Monday. Because suffering starts then.",
+    "fn_name": "is_monday",
+    "tests": [
+      {"input": [], "output": false}
+    ],
+    "solutions": {
+      "python": "import datetime\ndef is_monday():\n    return datetime.datetime.today().weekday() == 0",
+      "javascript": "function isMonday(){ return new Date().getDay() === 1; }",
+      "csharp": "bool IsMonday(){ return System.DateTime.Now.DayOfWeek == DayOfWeek.Monday; }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "dates",
+    "prompt": "Return true if year is a leap year. Just like job offers, they don’t come often.",
+    "fn_name": "is_leap",
+    "tests": [
+      {"input": [2020], "output": true},
+      {"input": [2023], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_leap(year):\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)",
+      "javascript": "function isLeap(year){ return (year%4===0 && (year%100!==0 || year%400===0)); }",
+      "csharp": "bool IsLeap(int year){ return (year%4==0 && (year%100!=0 || year%400==0)); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "dates",
+    "prompt": "Return age given birth year. Time marches on, unlike your career.",
+    "fn_name": "calc_age",
+    "tests": [
+      {"input": [2000], "output": 25}
+    ],
+    "solutions": {
+      "python": "import datetime\ndef calc_age(year):\n    return datetime.datetime.now().year - year",
+      "javascript": "function calcAge(year){ return new Date().getFullYear() - year; }",
+      "csharp": "int CalcAge(int year){ return System.DateTime.Now.Year - year; }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "dates",
+    "prompt": "Return true if deadline is before today. Spoiler: it is.",
+    "fn_name": "past_deadline",
+    "tests": [
+      {"input": ["2000-01-01"], "output": true}
+    ],
+    "solutions": {
+      "python": "import datetime\ndef past_deadline(date_str):\n    d = datetime.datetime.strptime(date_str, '%Y-%m-%d')\n    return d.date() < datetime.date.today()",
+      "javascript": "function pastDeadline(dateStr){ return new Date(dateStr) < new Date(); }",
+      "csharp": "bool PastDeadline(string dateStr){ return System.DateTime.Parse(dateStr) < System.DateTime.Now; }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "dates",
+    "prompt": "Return true if study_hours >= 12 today. Otherwise shame on you.",
+    "fn_name": "study_day",
+    "tests": [
+      {"input": [12], "output": true},
+      {"input": [5], "output": false}
+    ],
+    "solutions": {
+      "python": "def study_day(hours):\n    return hours >= 12",
+      "javascript": "function studyDay(hours){ return hours >= 12; }",
+      "csharp": "bool StudyDay(int hours){ return hours >= 12; }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "dates",
+    "prompt": "Return 'A+' if today is exam day, else 'not enough'.",
+    "fn_name": "exam_day",
+    "tests": [
+      {"input": ["2025-05-01"], "output": "A+"}
+    ],
+    "solutions": {
+      "python": "def exam_day(date_str):\n    # Fake logic: exam is 2025-05-01\n    return 'A+' if date_str == '2025-05-01' else 'not enough'",
+      "javascript": "function examDay(dateStr){ return dateStr==='2025-05-01' ? 'A+' : 'not enough'; }",
+      "csharp": "string ExamDay(string dateStr){ return dateStr==\"2025-05-01\" ? \"A+\" : \"not enough\"; }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "dates",
+    "prompt": "Return true if sprint_deadline is tomorrow. Because Agile is just waterfall in disguise.",
+    "fn_name": "sprint_deadline",
+    "tests": [
+      {"input": ["2025-09-28"], "output": true}
+    ],
+    "solutions": {
+      "python": "import datetime\ndef sprint_deadline(date_str):\n    d = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()\n    return d == datetime.date.today() + datetime.timedelta(days=1)",
+      "javascript": "function sprintDeadline(dateStr){ let d=new Date(dateStr); let t=new Date(); t.setDate(t.getDate()+1); return d.toDateString()===t.toDateString(); }",
+      "csharp": "bool SprintDeadline(string dateStr){ var d=System.DateTime.Parse(dateStr).Date; return d==System.DateTime.Now.Date.AddDays(1); }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "dates",
+    "prompt": "Return true if meeting_hour < 9. Because only sad tech companies do that.",
+    "fn_name": "early_meeting",
+    "tests": [
+      {"input": [8], "output": true},
+      {"input": [10], "output": false}
+    ],
+    "solutions": {
+      "python": "def early_meeting(hour):\n    return hour < 9",
+      "javascript": "function earlyMeeting(hour){ return hour < 9; }",
+      "csharp": "bool EarlyMeeting(int hour){ return hour < 9; }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "dates",
+    "prompt": "Return true if year >= 2023. That’s when the layoffs started.",
+    "fn_name": "layoff_year",
+    "tests": [
+      {"input": [2022], "output": false},
+      {"input": [2025], "output": true}
+    ],
+    "solutions": {
+      "python": "def layoff_year(year):\n    return year >= 2023",
+      "javascript": "function layoffYear(year){ return year >= 2023; }",
+      "csharp": "bool LayoffYear(int year){ return year >= 2023; }"
+    }
+  }
+]

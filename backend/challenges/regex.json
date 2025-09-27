@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "category": "regex",
+    "prompt": "Match a valid email address. No, 'asdf' doesn’t count. Neither does your job search.",
+    "fn_name": "is_email",
+    "tests": [
+      {"input": ["user@example.com"], "output": true},
+      {"input": ["not-an-email"], "output": false}
+    ],
+    "solutions": {
+      "python": "import re\ndef is_email(s):\n    return re.match(r'^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$', s) is not None",
+      "javascript": "function isEmail(s){ return /^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(s); }",
+      "csharp": "using System.Text.RegularExpressions;\nbool IsEmail(string s){ return Regex.IsMatch(s, @\"^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$\"); }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "regex",
+    "prompt": "Extract digits from a string. Because numbers hide, like internships.",
+    "fn_name": "extract_digits",
+    "tests": [
+      {"input": ["abc123"], "output": "123"}
+    ],
+    "solutions": {
+      "python": "import re\ndef extract_digits(s):\n    return ''.join(re.findall(r'\\d', s))",
+      "javascript": "function extractDigits(s){ return (s.match(/\\d/g)||[]).join(''); }",
+      "csharp": "using System.Text.RegularExpressions;\nstring ExtractDigits(string s){ return string.Concat(Regex.Matches(s, @\"\\d\").Select(m=>m.Value)); }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "regex",
+    "prompt": "Check if string is all uppercase. Respect the Caps Lock warrior in you.",
+    "fn_name": "is_uppercase",
+    "tests": [
+      {"input": ["HELLO"], "output": true},
+      {"input": ["Hi"], "output": false}
+    ],
+    "solutions": {
+      "python": "import re\ndef is_uppercase(s):\n    return re.fullmatch(r'[A-Z]+', s) is not None",
+      "javascript": "function isUppercase(s){ return /^[A-Z]+$/.test(s); }",
+      "csharp": "using System.Text.RegularExpressions;\nbool IsUppercase(string s){ return Regex.IsMatch(s, @\"^[A-Z]+$\"); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "regex",
+    "prompt": "Find all words starting with capital letters. Like those LinkedIn posts you keep ignoring.",
+    "fn_name": "find_capitalized",
+    "tests": [
+      {"input": ["Hello World"], "output": ["Hello","World"]}
+    ],
+    "solutions": {
+      "python": "import re\ndef find_capitalized(s):\n    return re.findall(r'\\b[A-Z][a-z]*', s)",
+      "javascript": "function findCapitalized(s){ return s.match(/\\b[A-Z][a-z]*/g)||[]; }",
+      "csharp": "using System.Text.RegularExpressions;\nList<string> FindCapitalized(string s){ return Regex.Matches(s, @\"\\b[A-Z][a-z]*\").Select(m=>m.Value).ToList(); }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "regex",
+    "prompt": "Replace all whitespace with underscores. Like your CV, trying to look filled.",
+    "fn_name": "underscore_spaces",
+    "tests": [
+      {"input": ["hello world"], "output": "hello_world"}
+    ],
+    "solutions": {
+      "python": "import re\ndef underscore_spaces(s):\n    return re.sub(r'\\s+', '_', s)",
+      "javascript": "function underscoreSpaces(s){ return s.replace(/\\s+/g,'_'); }",
+      "csharp": "using System.Text.RegularExpressions;\nstring UnderscoreSpaces(string s){ return Regex.Replace(s, @\"\\s+\", \"_\"); }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "regex",
+    "prompt": "Find hashtags in text. Because you’ll never trend anyway.",
+    "fn_name": "find_hashtags",
+    "tests": [
+      {"input": ["I love #coding"], "output": ["#coding"]}
+    ],
+    "solutions": {
+      "python": "import re\ndef find_hashtags(s):\n    return re.findall(r'#\\w+', s)",
+      "javascript": "function findHashtags(s){ return s.match(/#\\w+/g)||[]; }",
+      "csharp": "using System.Text.RegularExpressions;\nList<string> FindHashtags(string s){ return Regex.Matches(s, @\"#\\w+\").Select(m=>m.Value).ToList(); }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "regex",
+    "prompt": "Validate a phone number format XXX-XXX-XXXX. Nobody calls you anyway.",
+    "fn_name": "is_phone",
+    "tests": [
+      {"input": ["123-456-7890"], "output": true},
+      {"input": ["12345"], "output": false}
+    ],
+    "solutions": {
+      "python": "import re\ndef is_phone(s):\n    return re.fullmatch(r'\\d{3}-\\d{3}-\\d{4}', s) is not None",
+      "javascript": "function isPhone(s){ return /^\\d{3}-\\d{3}-\\d{4}$/.test(s); }",
+      "csharp": "using System.Text.RegularExpressions;\nbool IsPhone(string s){ return Regex.IsMatch(s, @\"^\\d{3}-\\d{3}-\\d{4}$\"); }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "regex",
+    "prompt": "Extract domain from email. Sadly, still not '@bigtech.com'.",
+    "fn_name": "get_domain",
+    "tests": [
+      {"input": ["user@example.com"], "output": "example.com"}
+    ],
+    "solutions": {
+      "python": "import re\ndef get_domain(s):\n    return re.sub(r'^.+@', '', s)",
+      "javascript": "function getDomain(s){ return s.replace(/^.+@/,''); }",
+      "csharp": "using System.Text.RegularExpressions;\nstring GetDomain(string s){ return Regex.Replace(s, @\"^.+@\", \"\"); }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "regex",
+    "prompt": "Check if string contains only digits. Unlike your skills section.",
+    "fn_name": "only_digits",
+    "tests": [
+      {"input": ["12345"], "output": true},
+      {"input": ["12a"], "output": false}
+    ],
+    "solutions": {
+      "python": "import re\ndef only_digits(s):\n    return re.fullmatch(r'\\d+', s) is not None",
+      "javascript": "function onlyDigits(s){ return /^\\d+$/.test(s); }",
+      "csharp": "using System.Text.RegularExpressions;\nbool OnlyDigits(string s){ return Regex.IsMatch(s, @\"^\\d+$\"); }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "regex",
+    "prompt": "Replace all vowels with '*'. Like your chances, censored.",
+    "fn_name": "censor_vowels",
+    "tests": [
+      {"input": ["hello"], "output": "h*ll*"}
+    ],
+    "solutions": {
+      "python": "import re\ndef censor_vowels(s):\n    return re.sub(r'[aeiouAEIOU]', '*', s)",
+      "javascript": "function censorVowels(s){ return s.replace(/[aeiouAEIOU]/g,'*'); }",
+      "csharp": "using System.Text.RegularExpressions;\nstring CensorVowels(string s){ return Regex.Replace(s, @\"[aeiouAEIOU]\", \"*\"); }"
+    }
+  }
+]

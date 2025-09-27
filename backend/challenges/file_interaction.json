@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "category": "file_interaction",
+    "prompt": "Write a function to save text to 'output.txt'. Because nothing screams success like writing to a file instead of having a job.",
+    "fn_name": "save_text",
+    "tests": [
+      {"input": ["hello"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_text(s):\n    with open('output.txt','w') as f:\n        f.write(s)\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveText(s){ fs.writeFileSync('output.txt', s); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveText(string s){ File.WriteAllText(\"output.txt\", s); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "file_interaction",
+    "prompt": "Read from 'input.txt' and return contents. Like your resume: ignored until opened.",
+    "fn_name": "read_text",
+    "tests": [
+      {"input": [], "output": "dummy"}
+    ],
+    "solutions": {
+      "python": "def read_text():\n    with open('input.txt','r') as f:\n        return f.read()",
+      "javascript": "const fs=require('fs');\nfunction readText(){ return fs.readFileSync('input.txt','utf8'); }",
+      "csharp": "using System.IO;\nstring ReadText(){ return File.ReadAllText(\"input.txt\"); }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "file_interaction",
+    "prompt": "Append a line to 'log.txt'. Pretend you’re logging bugs nobody will fix.",
+    "fn_name": "append_log",
+    "tests": [
+      {"input": ["crash"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def append_log(s):\n    with open('log.txt','a') as f:\n        f.write(s+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction appendLog(s){ fs.appendFileSync('log.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring AppendLog(string s){ File.AppendAllText(\"log.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "file_interaction",
+    "prompt": "Write your rejection letters to 'archive.txt'. It’s going to be a big file.",
+    "fn_name": "save_rejections",
+    "tests": [
+      {"input": ["Sorry, not a fit"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_rejections(s):\n    with open('archive.txt','a') as f:\n        f.write(s+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveRejections(s){ fs.appendFileSync('archive.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveRejections(string s){ File.AppendAllText(\"archive.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "file_interaction",
+    "prompt": "Write exam grades to 'grades.txt'. Too bad yours are disappointing.",
+    "fn_name": "save_grade",
+    "tests": [
+      {"input": ["F"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_grade(g):\n    with open('grades.txt','a') as f:\n        f.write(g+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveGrade(g){ fs.appendFileSync('grades.txt', g+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveGrade(string g){ File.AppendAllText(\"grades.txt\", g+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "file_interaction",
+    "prompt": "Save your coding bootcamp notes to 'notes.txt'. Method: copy-paste StackOverflow.",
+    "fn_name": "save_notes",
+    "tests": [
+      {"input": ["just google it"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_notes(s):\n    with open('notes.txt','a') as f:\n        f.write(s+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveNotes(s){ fs.appendFileSync('notes.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveNotes(string s){ File.AppendAllText(\"notes.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "file_interaction",
+    "prompt": "Write your LinkedIn connections to 'network.txt'. Empty, like your inbox.",
+    "fn_name": "save_network",
+    "tests": [
+      {"input": ["nobody"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_network(s):\n    with open('network.txt','a') as f:\n        f.write(s+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveNetwork(s){ fs.appendFileSync('network.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveNetwork(string s){ File.AppendAllText(\"network.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "file_interaction",
+    "prompt": "Save code submissions to 'submissions.txt'. Like recruiters, nobody will read them.",
+    "fn_name": "save_submission",
+    "tests": [
+      {"input": ["bad code"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_submission(s):\n    with open('submissions.txt','a') as f:\n        f.write(s+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveSubmission(s){ fs.appendFileSync('submissions.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveSubmission(string s){ File.AppendAllText(\"submissions.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "file_interaction",
+    "prompt": "Append your GitHub commits to 'activity.txt'. Warning: it’s empty.",
+    "fn_name": "save_activity",
+    "tests": [
+      {"input": ["commit"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_activity(s):\n    with open('activity.txt','a') as f:\n        f.write(s+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveActivity(s){ fs.appendFileSync('activity.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveActivity(string s){ File.AppendAllText(\"activity.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "file_interaction",
+    "prompt": "Log startup burn rate to 'burn.txt'. Plot twist: the company died.",
+    "fn_name": "save_burn",
+    "tests": [
+      {"input": ["$1M/day"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_burn(s):\n    with open('burn.txt','a') as f:\n        f.write(s+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveBurn(s){ fs.appendFileSync('burn.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveBurn(string s){ File.AppendAllText(\"burn.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  }
+]

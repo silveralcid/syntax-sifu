@@ -1,0 +1,143 @@
+[
+  {
+    "id": 1,
+    "category": "lists",
+    "prompt": "Return the first item in a list. Like recruiters picking their Ivy League favorite.",
+    "fn_name": "first_item",
+    "tests": [
+      {"input": [[1,2,3]], "output": 1}
+    ],
+    "solutions": {
+      "python": "def first_item(lst):\n    return lst[0]",
+      "javascript": "function firstItem(lst){ return lst[0]; }",
+      "csharp": "int FirstItem(List<int> lst){ return lst[0]; }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "lists",
+    "prompt": "Return the last item in a list. Closure is important, unlike your job search.",
+    "fn_name": "last_item",
+    "tests": [
+      {"input": [[10,20,30]], "output": 30}
+    ],
+    "solutions": {
+      "python": "def last_item(lst):\n    return lst[-1]",
+      "javascript": "function lastItem(lst){ return lst[lst.length-1]; }",
+      "csharp": "int LastItem(List<int> lst){ return lst[lst.Count-1]; }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "lists",
+    "prompt": "Return the list without the first item. Out with the old, like your resume.",
+    "fn_name": "chop_first",
+    "tests": [
+      {"input": [[1,2,3]], "output": [2,3]}
+    ],
+    "solutions": {
+      "python": "def chop_first(lst):\n    return lst[1:]",
+      "javascript": "function chopFirst(lst){ return lst.slice(1); }",
+      "csharp": "List<int> ChopFirst(List<int> lst){ return lst.Skip(1).ToList(); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "lists",
+    "prompt": "Return the length of a list. Because recruiters only care about length, not substance.",
+    "fn_name": "list_length",
+    "tests": [
+      {"input": [[1,2,3]], "output": 3}
+    ],
+    "solutions": {
+      "python": "def list_length(lst):\n    return len(lst)",
+      "javascript": "function listLength(lst){ return lst.length; }",
+      "csharp": "int ListLength(List<int> lst){ return lst.Count; }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "lists",
+    "prompt": "Return a list reversed. Edgy, unlike your GitHub contributions.",
+    "fn_name": "reverse_list",
+    "tests": [
+      {"input": [[1,2,3]], "output": [3,2,1]}
+    ],
+    "solutions": {
+      "python": "def reverse_list(lst):\n    return lst[::-1]",
+      "javascript": "function reverseList(lst){ return lst.slice().reverse(); }",
+      "csharp": "List<int> ReverseList(List<int> lst){ var copy=new List<int>(lst); copy.Reverse(); return copy; }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "lists",
+    "prompt": "Return a list with only even numbers. Like job offers, most values will be filtered out.",
+    "fn_name": "filter_even",
+    "tests": [
+      {"input": [[1,2,3,4]], "output": [2,4]}
+    ],
+    "solutions": {
+      "python": "def filter_even(lst):\n    return [x for x in lst if x%2==0]",
+      "javascript": "function filterEven(lst){ return lst.filter(x=>x%2===0); }",
+      "csharp": "List<int> FilterEven(List<int> lst){ return lst.Where(x=>x%2==0).ToList(); }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "lists",
+    "prompt": "Return the maximum item. Anything less is a disappointment to your family.",
+    "fn_name": "max_item",
+    "tests": [
+      {"input": [[3,7,2]], "output": 7}
+    ],
+    "solutions": {
+      "python": "def max_item(lst):\n    return max(lst)",
+      "javascript": "function maxItem(lst){ return Math.max(...lst); }",
+      "csharp": "int MaxItem(List<int> lst){ return lst.Max(); }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "lists",
+    "prompt": "Return the minimum item. That’s you in the job market.",
+    "fn_name": "min_item",
+    "tests": [
+      {"input": [[3,7,2]], "output": 2}
+    ],
+    "solutions": {
+      "python": "def min_item(lst):\n    return min(lst)",
+      "javascript": "function minItem(lst){ return Math.min(...lst); }",
+      "csharp": "int MinItem(List<int> lst){ return lst.Min(); }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "lists",
+    "prompt": "Return true if list is empty. Like your bank account.",
+    "fn_name": "is_empty",
+    "tests": [
+      {"input": [[]], "output": true},
+      {"input": [[1]], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_empty(lst):\n    return len(lst)==0",
+      "javascript": "function isEmpty(lst){ return lst.length===0; }",
+      "csharp": "bool IsEmpty(List<int> lst){ return lst.Count==0; }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "lists",
+    "prompt": "Return the sum of the list. Spoiler: it’s still less than a FAANG salary.",
+    "fn_name": "sum_list",
+    "tests": [
+      {"input": [[1,2,3]], "output": 6}
+    ],
+    "solutions": {
+      "python": "def sum_list(lst):\n    return sum(lst)",
+      "javascript": "function sumList(lst){ return lst.reduce((a,b)=>a+b,0); }",
+      "csharp": "int SumList(List<int> lst){ return lst.Sum(); }"
+    }
+  }
+]

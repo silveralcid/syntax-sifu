@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "category": "json",
+    "prompt": "Given a JSON string, parse it and return the value for key 'name'. Congrats, you’re a parser now. Still unemployed though.",
+    "fn_name": "get_name",
+    "tests": [
+      {"input": ["{\"name\": \"Sifu\"}"], "output": "Sifu"}
+    ],
+    "solutions": {
+      "python": "import json\ndef get_name(s):\n    return json.loads(s)['name']",
+      "javascript": "function getName(s){ return JSON.parse(s).name; }",
+      "csharp": "using System.Text.Json;\nstring GetName(string s){ return JsonDocument.Parse(s).RootElement.GetProperty(\"name\").GetString(); }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "json",
+    "prompt": "Return true if JSON string contains key 'hired'. False otherwise. Spoiler: false.",
+    "fn_name": "has_hired",
+    "tests": [
+      {"input": ["{\"hired\": true}"], "output": true},
+      {"input": ["{\"skills\": []}"], "output": false}
+    ],
+    "solutions": {
+      "python": "def has_hired(s):\n    import json\n    return 'hired' in json.loads(s)",
+      "javascript": "function hasHired(s){ return 'hired' in JSON.parse(s); }",
+      "csharp": "using System.Text.Json;\nbool HasHired(string s){ return JsonDocument.Parse(s).RootElement.TryGetProperty(\"hired\", out _); }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "json",
+    "prompt": "Parse GPA from JSON. Return 'disowned' if < 4.0.",
+    "fn_name": "parse_gpa",
+    "tests": [
+      {"input": ["{\"gpa\": 3.5}"], "output": "disowned"},
+      {"input": ["{\"gpa\": 4.0}"], "output": "4.0"}
+    ],
+    "solutions": {
+      "python": "def parse_gpa(s):\n    import json\n    g=json.loads(s)['gpa']\n    return 'disowned' if g<4.0 else str(g)",
+      "javascript": "function parseGpa(s){ let g=JSON.parse(s).gpa; return g<4.0 ? 'disowned' : g.toString(); }",
+      "csharp": "using System.Text.Json;\nstring ParseGpa(string s){ double g=JsonDocument.Parse(s).RootElement.GetProperty(\"gpa\").GetDouble(); return g<4.0?\"disowned\":g.ToString(); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "json",
+    "prompt": "Return number of keys in JSON. Because recruiters love counting keywords.",
+    "fn_name": "count_keys",
+    "tests": [
+      {"input": ["{\"a\":1,\"b\":2}"], "output": 2}
+    ],
+    "solutions": {
+      "python": "def count_keys(s):\n    import json\n    return len(json.loads(s))",
+      "javascript": "function countKeys(s){ return Object.keys(JSON.parse(s)).length; }",
+      "csharp": "using System.Text.Json;\nint CountKeys(string s){ return JsonDocument.Parse(s).RootElement.EnumerateObject().Count(); }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "json",
+    "prompt": "Extract 'salary' from JSON. Probably zero.",
+    "fn_name": "get_salary",
+    "tests": [
+      {"input": ["{\"salary\": 0}"], "output": 0}
+    ],
+    "solutions": {
+      "python": "def get_salary(s):\n    import json\n    return json.loads(s)['salary']",
+      "javascript": "function getSalary(s){ return JSON.parse(s).salary; }",
+      "csharp": "using System.Text.Json;\nint GetSalary(string s){ return JsonDocument.Parse(s).RootElement.GetProperty(\"salary\").GetInt32(); }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "json",
+    "prompt": "Parse JSON of student and return 'passed' if score >= 60 else 'failed'. Either way, your parents sigh.",
+    "fn_name": "check_pass",
+    "tests": [
+      {"input": ["{\"score\": 75}"], "output": "passed"},
+      {"input": ["{\"score\": 40}"], "output": "failed"}
+    ],
+    "solutions": {
+      "python": "def check_pass(s):\n    import json\n    score=json.loads(s)['score']\n    return 'passed' if score>=60 else 'failed'",
+      "javascript": "function checkPass(s){ let score=JSON.parse(s).score; return score>=60?'passed':'failed'; }",
+      "csharp": "using System.Text.Json;\nstring CheckPass(string s){ int score=JsonDocument.Parse(s).RootElement.GetProperty(\"score\").GetInt32(); return score>=60?\"passed\":\"failed\"; }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "json",
+    "prompt": "Return true if JSON has key 'experience'. False otherwise. Don’t worry, yours doesn’t.",
+    "fn_name": "has_experience",
+    "tests": [
+      {"input": ["{\"experience\": 2}"], "output": true},
+      {"input": ["{\"skills\": []}"], "output": false}
+    ],
+    "solutions": {
+      "python": "def has_experience(s):\n    import json\n    return 'experience' in json.loads(s)",
+      "javascript": "function hasExperience(s){ return 'experience' in JSON.parse(s); }",
+      "csharp": "using System.Text.Json;\nbool HasExperience(string s){ return JsonDocument.Parse(s).RootElement.TryGetProperty(\"experience\", out _); }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "json",
+    "prompt": "Given JSON with 'bugs': N, return 'ship it' if N==0, else 'cry'.",
+    "fn_name": "bug_check",
+    "tests": [
+      {"input": ["{\"bugs\": 0}"], "output": "ship it"},
+      {"input": ["{\"bugs\": 5}"], "output": "cry"}
+    ],
+    "solutions": {
+      "python": "def bug_check(s):\n    import json\n    n=json.loads(s)['bugs']\n    return 'ship it' if n==0 else 'cry'",
+      "javascript": "function bugCheck(s){ let n=JSON.parse(s).bugs; return n===0?'ship it':'cry'; }",
+      "csharp": "using System.Text.Json;\nstring BugCheck(string s){ int n=JsonDocument.Parse(s).RootElement.GetProperty(\"bugs\").GetInt32(); return n==0?\"ship it\":\"cry\"; }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "json",
+    "prompt": "Parse JSON with array 'commits'. Return its length. Warning: zero.",
+    "fn_name": "commit_count",
+    "tests": [
+      {"input": ["{\"commits\": []}"], "output": 0},
+      {"input": ["{\"commits\": [1,2]}"], "output": 2}
+    ],
+    "solutions": {
+      "python": "def commit_count(s):\n    import json\n    return len(json.loads(s)['commits'])",
+      "javascript": "function commitCount(s){ return JSON.parse(s).commits.length; }",
+      "csharp": "using System.Text.Json;\nint CommitCount(string s){ return JsonDocument.Parse(s).RootElement.GetProperty(\"commits\").GetArrayLength(); }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "json",
+    "prompt": "Convert a dictionary/object to JSON string. Because YAML would’ve been too easy.",
+    "fn_name": "to_json",
+    "tests": [
+      {"input": [{"a": 1}], "output": "{\"a\": 1}"}
+    ],
+    "solutions": {
+      "python": "import json\ndef to_json(obj):\n    return json.dumps(obj)",
+      "javascript": "function toJson(obj){ return JSON.stringify(obj); }",
+      "csharp": "using System.Text.Json;\nstring ToJson(object obj){ return JsonSerializer.Serialize(obj); }"
+    }
+  },
+  {
+    "id": 11,
+    "category": "json",
+    "prompt": "Did you know the file for this challenge is literally 'json.json'? Yeah, I hate it too.",
+    "fn_name": "meta_json",
+    "tests": [
+      {"input": [], "output": "meta indeed"}
+    ],
+    "solutions": {
+      "python": "def meta_json():\n    return 'meta indeed'",
+      "javascript": "function metaJson(){ return 'meta indeed'; }",
+      "csharp": "string MetaJson(){ return \"meta indeed\"; }"
+    }
+  }
+]

@@ -1,0 +1,159 @@
+[
+  {
+    "id": 1,
+    "category": "unit tests",
+    "prompt": "Write pytest tests for is_even(n). Yes, even this needs tests apparently.",
+    "fn_name": "test_is_even",
+    "tests": [
+      {"input": [2], "output": true},
+      {"input": [3], "output": false}
+    ],
+    "solutions": {
+      "python": "def test_is_even():\n    assert is_even(2)\n    assert not is_even(3)",
+      "javascript": "test('isEven',()=>{\n    expect(isEven(2)).toBe(true);\n    expect(isEven(3)).toBe(false);\n});",
+      "csharp": "[Test]\npublic void TestIsEven(){ Assert.IsTrue(IsEven(2)); Assert.IsFalse(IsEven(3)); }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "unit tests",
+    "prompt": "Write tests for reverse_string(s). QA is watching, unlike recruiters.",
+    "fn_name": "test_reverse_string",
+    "tests": [
+      {"input": ["abc"], "output": "cba"}
+    ],
+    "solutions": {
+      "python": "def test_reverse_string():\n    assert reverse_string('abc')=='cba'",
+      "javascript": "test('reverseString',()=>{\n    expect(reverseString('abc')).toBe('cba');\n});",
+      "csharp": "[Test]\npublic void TestReverseString(){ Assert.AreEqual(\"cba\", ReverseString(\"abc\")); }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "unit tests",
+    "prompt": "Test factorial. Don’t forget 0! = 1, or math teachers cry.",
+    "fn_name": "test_factorial",
+    "tests": [
+      {"input": [5], "output": 120}
+    ],
+    "solutions": {
+      "python": "def test_factorial():\n    assert factorial(5)==120\n    assert factorial(0)==1",
+      "javascript": "test('factorial',()=>{\n    expect(factorial(5)).toBe(120);\n    expect(factorial(0)).toBe(1);\n});",
+      "csharp": "[Test]\npublic void TestFactorial(){ Assert.AreEqual(120, Factorial(5)); Assert.AreEqual(1, Factorial(0)); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "unit tests",
+    "prompt": "Write tests for fizzbuzz. Childhood trauma, now automated.",
+    "fn_name": "test_fizzbuzz",
+    "tests": [
+      {"input": [3], "output": "fizz"},
+      {"input": [5], "output": "buzz"},
+      {"input": [15], "output": "fizzbuzz"}
+    ],
+    "solutions": {
+      "python": "def test_fizzbuzz():\n    assert fizzbuzz(3)=='fizz'\n    assert fizzbuzz(5)=='buzz'\n    assert fizzbuzz(15)=='fizzbuzz'",
+      "javascript": "test('fizzbuzz',()=>{\n    expect(fizzbuzz(3)).toBe('fizz');\n    expect(fizzbuzz(5)).toBe('buzz');\n    expect(fizzbuzz(15)).toBe('fizzbuzz');\n});",
+      "csharp": "[Test]\npublic void TestFizzbuzz(){ Assert.AreEqual(\"fizz\", Fizzbuzz(3)); Assert.AreEqual(\"buzz\", Fizzbuzz(5)); Assert.AreEqual(\"fizzbuzz\", Fizzbuzz(15)); }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "unit tests",
+    "prompt": "Write tests for max_of_two. Picking favorites officially.",
+    "fn_name": "test_max_of_two",
+    "tests": [
+      {"input": [3,7], "output": 7}
+    ],
+    "solutions": {
+      "python": "def test_max_of_two():\n    assert max_of_two(3,7)==7\n    assert max_of_two(7,3)==7",
+      "javascript": "test('maxOfTwo',()=>{\n    expect(maxOfTwo(3,7)).toBe(7);\n    expect(maxOfTwo(7,3)).toBe(7);\n});",
+      "csharp": "[Test]\npublic void TestMaxOfTwo(){ Assert.AreEqual(7, MaxOfTwo(3,7)); Assert.AreEqual(7, MaxOfTwo(7,3)); }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "unit tests",
+    "prompt": "Write tests for Student.greet(). Because your parents won’t.",
+    "fn_name": "test_student_greet",
+    "tests": [
+      {"input": ["Alice"], "output": "Hi, I am Alice"}
+    ],
+    "solutions": {
+      "python": "def test_student_greet():\n    s=Student('Alice')\n    assert s.greet()==\"Hi, I am Alice\"",
+      "javascript": "test('Student.greet',()=>{\n    let s=new Student('Alice');\n    expect(s.greet()).toBe('Hi, I am Alice');\n});",
+      "csharp": "[Test]\npublic void TestStudentGreet(){ var s=new Student(\"Alice\"); Assert.AreEqual(\"Hi, I am Alice\", s.Greet()); }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "unit tests",
+    "prompt": "Write tests for Car.drive(). Sorry, still no Tesla internship.",
+    "fn_name": "test_car_drive",
+    "tests": [
+      {"input": [], "output": "vroom"}
+    ],
+    "solutions": {
+      "python": "def test_car_drive():\n    c=Car()\n    assert c.drive()==\"vroom\"",
+      "javascript": "test('Car.drive',()=>{\n    let c=new Car();\n    expect(c.drive()).toBe('vroom');\n});",
+      "csharp": "[Test]\npublic void TestCarDrive(){ var c=new Car(); Assert.AreEqual(\"vroom\", c.Drive()); }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "unit tests",
+    "prompt": "Write tests for list reverse. Edge cases will reverse you too.",
+    "fn_name": "test_reverse_list",
+    "tests": [
+      {"input": [[1,2,3]], "output": [3,2,1]}
+    ],
+    "solutions": {
+      "python": "def test_reverse_list():\n    assert reverse_list([1,2,3])==[3,2,1]",
+      "javascript": "test('reverseList',()=>{\n    expect(reverseList([1,2,3])).toEqual([3,2,1]);\n});",
+      "csharp": "[Test]\npublic void TestReverseList(){ CollectionAssert.AreEqual(new[]{3,2,1}, ReverseList(new List<int>{1,2,3})); }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "unit tests",
+    "prompt": "Write tests for json.get_name(). Because parsing is apparently hard now.",
+    "fn_name": "test_get_name",
+    "tests": [
+      {"input": ["{\"name\": \"Sifu\"}"], "output": "Sifu"}
+    ],
+    "solutions": {
+      "python": "def test_get_name():\n    assert get_name('{\"name\":\"Sifu\"}')=='Sifu'",
+      "javascript": "test('getName',()=>{\n    expect(getName('{\"name\":\"Sifu\"}')).toBe('Sifu');\n});",
+      "csharp": "[Test]\npublic void TestGetName(){ Assert.AreEqual(\"Sifu\", GetName(\"{\\\"name\\\":\\\"Sifu\\\"}\")); }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "unit tests",
+    "prompt": "Write tests for not_value(). Because flipping booleans is your peak career moment.",
+    "fn_name": "test_not_value",
+    "tests": [
+      {"input": [true], "output": false}
+    ],
+    "solutions": {
+      "python": "def test_not_value():\n    assert not_value(True)==False\n    assert not_value(False)==True",
+      "javascript": "test('notValue',()=>{\n    expect(notValue(true)).toBe(false);\n    expect(notValue(false)).toBe(true);\n});",
+      "csharp": "[Test]\npublic void TestNotValue(){ Assert.IsFalse(NotValue(true)); Assert.IsTrue(NotValue(false)); }"
+    }
+  },
+  {
+    "id": 11,
+    "category": "unit tests",
+    "prompt": "When I was planning this app I had a hell of a time figuring out how to unit test a unit test. Good luck.",
+    "fn_name": "test_a_test",
+    "tests": [
+      {"input": [], "output": "meta_passed"}
+    ],
+    "solutions": {
+      "python": "def test_a_test():\n    # How do you even test a test? Here’s one way.\n    def fake_test(): return True\n    assert fake_test() == True\n    return 'meta_passed'",
+      "javascript": "test('aTest',()=>{\n    function fakeTest(){ return true; }\n    expect(fakeTest()).toBe(true);\n});",
+      "csharp": "[Test]\npublic void TestATest(){ bool FakeTest()=>true; Assert.IsTrue(FakeTest()); }"
+    }
+  }
+]

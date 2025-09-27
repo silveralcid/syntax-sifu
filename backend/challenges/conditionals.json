@@ -1,0 +1,153 @@
+[
+  {
+    "id": 1,
+    "category": "conditionals",
+    "prompt": "Return 'hired' if skill_level >= 9000, else 'rejected'. Spoiler: you’re rejected.",
+    "fn_name": "job_status",
+    "tests": [
+      {"input": [5000], "output": "rejected"},
+      {"input": [10000], "output": "hired"}
+    ],
+    "solutions": {
+      "python": "def job_status(skill_level):\n    return 'hired' if skill_level >= 9000 else 'rejected'",
+      "javascript": "function jobStatus(skill){ return skill >= 9000 ? 'hired' : 'rejected'; }",
+      "csharp": "string JobStatus(int skill){ return skill >= 9000 ? \"hired\" : \"rejected\"; }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "conditionals",
+    "prompt": "Check if a number is even. Humanity depends on it, apparently.",
+    "fn_name": "is_even",
+    "tests": [
+      {"input": [4], "output": true},
+      {"input": [5], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_even(n):\n    return n % 2 == 0",
+      "javascript": "function isEven(n){ return n % 2 === 0; }",
+      "csharp": "bool IsEven(int n){ return n % 2 == 0; }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "conditionals",
+    "prompt": "Return 'adult' if age >= 18, else 'child'. Deep philosophy.",
+    "fn_name": "age_group",
+    "tests": [
+      {"input": [20], "output": "adult"},
+      {"input": [10], "output": "child"}
+    ],
+    "solutions": {
+      "python": "def age_group(age):\n    return 'adult' if age >= 18 else 'child'",
+      "javascript": "function ageGroup(age){ return age >= 18 ? 'adult' : 'child'; }",
+      "csharp": "string AgeGroup(int age){ return age >= 18 ? \"adult\" : \"child\"; }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "conditionals",
+    "prompt": "Return 'passed' if grade >= 60, else 'failed'. Your parents already know the outcome.",
+    "fn_name": "pass_fail",
+    "tests": [
+      {"input": [75], "output": "passed"},
+      {"input": [40], "output": "failed"}
+    ],
+    "solutions": {
+      "python": "def pass_fail(grade):\n    return 'passed' if grade >= 60 else 'failed'",
+      "javascript": "function passFail(grade){ return grade >= 60 ? 'passed' : 'failed'; }",
+      "csharp": "string PassFail(int grade){ return grade >= 60 ? \"passed\" : \"failed\"; }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "conditionals",
+    "prompt": "Return 'sleep' if hours < 5, else 'awake'. This explains your code quality.",
+    "fn_name": "sleep_check",
+    "tests": [
+      {"input": [3], "output": "sleep"},
+      {"input": [7], "output": "awake"}
+    ],
+    "solutions": {
+      "python": "def sleep_check(hours):\n    return 'sleep' if hours < 5 else 'awake'",
+      "javascript": "function sleepCheck(hours){ return hours < 5 ? 'sleep' : 'awake'; }",
+      "csharp": "string SleepCheck(int hours){ return hours < 5 ? \"sleep\" : \"awake\"; }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "conditionals",
+    "prompt": "Return 'A+' if grade == 100, else 'not enough'. Your father is still disappointed.",
+    "fn_name": "grade_perfect",
+    "tests": [
+      {"input": [100], "output": "A+"},
+      {"input": [99], "output": "not enough"}
+    ],
+    "solutions": {
+      "python": "def grade_perfect(grade):\n    return 'A+' if grade == 100 else 'not enough'",
+      "javascript": "function gradePerfect(grade){ return grade === 100 ? 'A+' : 'not enough'; }",
+      "csharp": "string GradePerfect(int grade){ return grade == 100 ? \"A+\" : \"not enough\"; }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "conditionals",
+    "prompt": "Return 'fizz' if divisible by 3, 'buzz' if divisible by 5, 'fizzbuzz' if both. Childhood trauma incoming.",
+    "fn_name": "fizzbuzz",
+    "tests": [
+      {"input": [3], "output": "fizz"},
+      {"input": [5], "output": "buzz"},
+      {"input": [15], "output": "fizzbuzz"}
+    ],
+    "solutions": {
+      "python": "def fizzbuzz(n):\n    if n % 15 == 0: return 'fizzbuzz'\n    elif n % 3 == 0: return 'fizz'\n    elif n % 5 == 0: return 'buzz'\n    else: return str(n)",
+      "javascript": "function fizzbuzz(n){ if(n%15===0) return 'fizzbuzz'; if(n%3===0) return 'fizz'; if(n%5===0) return 'buzz'; return n.toString(); }",
+      "csharp": "string Fizzbuzz(int n){ if(n%15==0) return \"fizzbuzz\"; if(n%3==0) return \"fizz\"; if(n%5==0) return \"buzz\"; return n.ToString(); }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "conditionals",
+    "prompt": "Return 'winner' if n == 1, else 'loser'. Basically Squid Game logic.",
+    "fn_name": "squid_game",
+    "tests": [
+      {"input": [1], "output": "winner"},
+      {"input": [42], "output": "loser"}
+    ],
+    "solutions": {
+      "python": "def squid_game(n):\n    return 'winner' if n == 1 else 'loser'",
+      "javascript": "function squidGame(n){ return n === 1 ? 'winner' : 'loser'; }",
+      "csharp": "string SquidGame(int n){ return n == 1 ? \"winner\" : \"loser\"; }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "conditionals",
+    "prompt": "Return 'on-call' if engineer, else 'free'. Spoiler: nobody in tech is free.",
+    "fn_name": "on_call",
+    "tests": [
+      {"input": ["engineer"], "output": "on-call"},
+      {"input": ["designer"], "output": "free"}
+    ],
+    "solutions": {
+      "python": "def on_call(role):\n    return 'on-call' if role == 'engineer' else 'free'",
+      "javascript": "function onCall(role){ return role === 'engineer' ? 'on-call' : 'free'; }",
+      "csharp": "string OnCall(string role){ return role == \"engineer\" ? \"on-call\" : \"free\"; }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "conditionals",
+    "prompt": "Return 'layoff' if year >= 2023, else 'boom times'.",
+    "fn_name": "job_market",
+    "tests": [
+      {"input": [2022], "output": "boom times"},
+      {"input": [2025], "output": "layoff"}
+    ],
+    "solutions": {
+      "python": "def job_market(year):\n    return 'layoff' if year >= 2023 else 'boom times'",
+      "javascript": "function jobMarket(year){ return year >= 2023 ? 'layoff' : 'boom times'; }",
+      "csharp": "string JobMarket(int year){ return year >= 2023 ? \"layoff\" : \"boom times\"; }"
+    }
+  }
+]

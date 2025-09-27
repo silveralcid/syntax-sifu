@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "category": "classes",
+    "prompt": "Make an Animal class. Subclass Dog. Dog goes 'bark'. Unlike you, it gets callbacks.",
+    "fn_name": "Dog",
+    "tests": [
+      {"input": [], "output": "bark"}
+    ],
+    "solutions": {
+      "python": "class Animal:\n    pass\n\nclass Dog(Animal):\n    def sound(self):\n        return 'bark'",
+      "javascript": "class Animal {}\nclass Dog extends Animal { sound(){ return 'bark'; } }",
+      "csharp": "class Animal {}\nclass Dog : Animal { public string Sound(){ return \"bark\"; } }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "classes",
+    "prompt": "Make a Car class with drive() → 'vroom'. Elon Musk is already taking credit.",
+    "fn_name": "Car",
+    "tests": [
+      {"input": [], "output": "vroom"}
+    ],
+    "solutions": {
+      "python": "class Car:\n    def drive(self):\n        return 'vroom'",
+      "javascript": "class Car { drive(){ return 'vroom'; } }",
+      "csharp": "class Car { public string Drive(){ return \"vroom\"; } }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "classes",
+    "prompt": "Make a Student class with greet() → 'Hi, I am NAME'. Still won’t save your GPA.",
+    "fn_name": "Student",
+    "tests": [
+      {"input": ["Alice"], "output": "Hi, I am Alice"}
+    ],
+    "solutions": {
+      "python": "class Student:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return f'Hi, I am {self.name}'",
+      "javascript": "class Student { constructor(name){ this.name=name; } greet(){ return `Hi, I am ${this.name}`; } }",
+      "csharp": "class Student { public string Name; public Student(string name){ Name=name; } public string Greet(){ return $\"Hi, I am {Name}\"; } }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "classes",
+    "prompt": "Make a Recruiter class. Method ghost() should always return true. Too real?",
+    "fn_name": "Recruiter",
+    "tests": [
+      {"input": [], "output": true}
+    ],
+    "solutions": {
+      "python": "class Recruiter:\n    def ghost(self):\n        return True",
+      "javascript": "class Recruiter { ghost(){ return true; } }",
+      "csharp": "class Recruiter { public bool Ghost(){ return true; } }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "classes",
+    "prompt": "Make a Superhero class with catchphrase() → 'I am Batman'. Gravelly voice optional.",
+    "fn_name": "Superhero",
+    "tests": [
+      {"input": [], "output": "I am Batman"}
+    ],
+    "solutions": {
+      "python": "class Superhero:\n    def catchphrase(self):\n        return 'I am Batman'",
+      "javascript": "class Superhero { catchphrase(){ return 'I am Batman'; } }",
+      "csharp": "class Superhero { public string Catchphrase(){ return \"I am Batman\"; } }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "classes",
+    "prompt": "Make a Parent class with method disappointed() → 'Not enough'. Accurate.",
+    "fn_name": "Parent",
+    "tests": [
+      {"input": [], "output": "Not enough"}
+    ],
+    "solutions": {
+      "python": "class Parent:\n    def disappointed(self):\n        return 'Not enough'",
+      "javascript": "class Parent { disappointed(){ return 'Not enough'; } }",
+      "csharp": "class Parent { public string Disappointed(){ return \"Not enough\"; } }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "classes",
+    "prompt": "Make a StrictAsianDad class with motivate() → 'Study harder'. Tears included.",
+    "fn_name": "StrictAsianDad",
+    "tests": [
+      {"input": [], "output": "Study harder"}
+    ],
+    "solutions": {
+      "python": "class StrictAsianDad:\n    def motivate(self):\n        return 'Study harder'",
+      "javascript": "class StrictAsianDad { motivate(){ return 'Study harder'; } }",
+      "csharp": "class StrictAsianDad { public string Motivate(){ return \"Study harder\"; } }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "classes",
+    "prompt": "Make a Startup class. Method funding() → false. Reality check.",
+    "fn_name": "Startup",
+    "tests": [
+      {"input": [], "output": false}
+    ],
+    "solutions": {
+      "python": "class Startup:\n    def funding(self):\n        return False",
+      "javascript": "class Startup { funding(){ return false; } }",
+      "csharp": "class Startup { public bool Funding(){ return false; } }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "classes",
+    "prompt": "Make a FAANG class. Method salary() → 200000. Prestige tax included.",
+    "fn_name": "FAANG",
+    "tests": [
+      {"input": [], "output": 200000}
+    ],
+    "solutions": {
+      "python": "class FAANG:\n    def salary(self):\n        return 200000",
+      "javascript": "class FAANG { salary(){ return 200000; } }",
+      "csharp": "class FAANG { public int Salary(){ return 200000; } }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "classes",
+    "prompt": "Make a Bootcamp class. Method skills() → ['copy','paste']. Accurate.",
+    "fn_name": "Bootcamp",
+    "tests": [
+      {"input": [], "output": ["copy","paste"]}
+    ],
+    "solutions": {
+      "python": "class Bootcamp:\n    def skills(self):\n        return ['copy','paste']",
+      "javascript": "class Bootcamp { skills(){ return ['copy','paste']; } }",
+      "csharp": "class Bootcamp { public List<string> Skills(){ return new List<string>{\"copy\",\"paste\"}; } }"
+    }
+  }
+]

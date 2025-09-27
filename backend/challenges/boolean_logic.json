@@ -1,0 +1,151 @@
+[
+  {
+    "id": 1,
+    "category": "boolean_logic",
+    "prompt": "Return true if you have a job, false otherwise. Guess the output.",
+    "fn_name": "has_job",
+    "tests": [
+      {"input": [], "output": false}
+    ],
+    "solutions": {
+      "python": "def has_job():\n    return False",
+      "javascript": "function hasJob(){ return false; }",
+      "csharp": "bool HasJob(){ return false; }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "boolean_logic",
+    "prompt": "Return true if bank_balance > 0, else false. Spoiler: it’s false.",
+    "fn_name": "is_solvent",
+    "tests": [
+      {"input": [100], "output": true},
+      {"input": [0], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_solvent(balance):\n    return balance > 0",
+      "javascript": "function isSolvent(balance){ return balance > 0; }",
+      "csharp": "bool IsSolvent(int balance){ return balance > 0; }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "boolean_logic",
+    "prompt": "Return true if job_offers > 0, else false. Easy — you’ll never hit true.",
+    "fn_name": "has_offer",
+    "tests": [
+      {"input": [0], "output": false},
+      {"input": [1], "output": true}
+    ],
+    "solutions": {
+      "python": "def has_offer(n):\n    return n > 0",
+      "javascript": "function hasOffer(n){ return n > 0; }",
+      "csharp": "bool HasOffer(int n){ return n > 0; }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "boolean_logic",
+    "prompt": "Return true if student finished homework, false otherwise. Let’s be honest: it’s false.",
+    "fn_name": "finished_homework",
+    "tests": [
+      {"input": [true], "output": true},
+      {"input": [false], "output": false}
+    ],
+    "solutions": {
+      "python": "def finished_homework(done):\n    return done",
+      "javascript": "function finishedHomework(done){ return done; }",
+      "csharp": "bool FinishedHomework(bool done){ return done; }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "boolean_logic",
+    "prompt": "Return true if code compiles, else false. Your default is false.",
+    "fn_name": "compiles",
+    "tests": [
+      {"input": [true], "output": true},
+      {"input": [false], "output": false}
+    ],
+    "solutions": {
+      "python": "def compiles(ok):\n    return ok",
+      "javascript": "function compiles(ok){ return ok; }",
+      "csharp": "bool Compiles(bool ok){ return ok; }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "boolean_logic",
+    "prompt": "Return true if student_sleep_hours >= 8. Unrealistic condition.",
+    "fn_name": "well_rested",
+    "tests": [
+      {"input": [8], "output": true},
+      {"input": [4], "output": false}
+    ],
+    "solutions": {
+      "python": "def well_rested(hours):\n    return hours >= 8",
+      "javascript": "function wellRested(hours){ return hours >= 8; }",
+      "csharp": "bool WellRested(int hours){ return hours >= 8; }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "boolean_logic",
+    "prompt": "Return true if GPA == 4.0, else false. Anything less is shameful.",
+    "fn_name": "perfect_gpa",
+    "tests": [
+      {"input": [4.0], "output": true},
+      {"input": [3.9], "output": false}
+    ],
+    "solutions": {
+      "python": "def perfect_gpa(g):\n    return g == 4.0",
+      "javascript": "function perfectGpa(g){ return g === 4.0; }",
+      "csharp": "bool PerfectGpa(double g){ return g == 4.0; }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "boolean_logic",
+    "prompt": "Return true if hours_coding >= 12. Otherwise, bring dishonor to family.",
+    "fn_name": "grind_hours",
+    "tests": [
+      {"input": [12], "output": true},
+      {"input": [6], "output": false}
+    ],
+    "solutions": {
+      "python": "def grind_hours(hours):\n    return hours >= 12",
+      "javascript": "function grindHours(hours){ return hours >= 12; }",
+      "csharp": "bool GrindHours(int hours){ return hours >= 12; }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "boolean_logic",
+    "prompt": "Return true if company == 'Google'. Else false, because prestige matters.",
+    "fn_name": "is_big_tech",
+    "tests": [
+      {"input": ["Google"], "output": true},
+      {"input": ["Startup"], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_big_tech(company):\n    return company == 'Google'",
+      "javascript": "function isBigTech(company){ return company === 'Google'; }",
+      "csharp": "bool IsBigTech(string company){ return company == \"Google\"; }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "boolean_logic",
+    "prompt": "Return true if salary >= 200k. Otherwise false. FAANG or bust.",
+    "fn_name": "faang_salary",
+    "tests": [
+      {"input": [200000], "output": true},
+      {"input": [100000], "output": false}
+    ],
+    "solutions": {
+      "python": "def faang_salary(s):\n    return s >= 200000",
+      "javascript": "function faangSalary(s){ return s >= 200000; }",
+      "csharp": "bool FaangSalary(int s){ return s >= 200000; }"
+    }
+  }
+]
