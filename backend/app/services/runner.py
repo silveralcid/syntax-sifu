@@ -5,8 +5,8 @@ import os
 from typing import List, Dict, Any
 import json
 from app.core.config import OPENROUTER_API_KEY
+from app.core.logger import logger
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Priority list of models: best → fallback
@@ -62,6 +62,10 @@ Return ONLY valid JSON in this format:
             "temperature": 0
         }
 
+        logger.debug(f"🚀 Sending request to model: {model}")
+        logger.debug(f"🔹 Prompt (first 300 chars): {prompt[:300]}...")
+        logger.debug(f"🔹 Tests: {tests}")
+
         r = requests.post(
             OPENROUTER_URL,
             headers=headers,
@@ -71,15 +75,21 @@ Return ONLY valid JSON in this format:
         r.raise_for_status()
 
         content = r.json()["choices"][0]["message"]["content"].strip()
+        logger.debug(f"📩 Raw response from {model}: {content[:200]}...")
 
         try:
             parsed = json.loads(content)
-            print(f"✅ Validation completed using {model}")
-            parsed["_model"] = model  # attach model info
+            parsed["_model"] = model
+            logger.info(f"✅ Validation completed using {model}")
             return parsed
         except json.JSONDecodeError:
-            print(f"⚠️ {model} returned invalid JSON")
-            return {"passed": False, "failed_cases": [], "error": "Invalid JSON from model", "_model": model}
+            logger.warning(f"⚠️ {model} returned invalid JSON")
+            return {
+                "passed": False,
+                "failed_cases": [],
+                "error": "Invalid JSON from model",
+                "_model": model
+            }
 
     last_error = None
 
@@ -87,9 +97,14 @@ Return ONLY valid JSON in this format:
         try:
             return _ask_model(model)
         except Exception as e:
-            print(f"⚠️ Model {model} failed: {e}")
+            logger.warning(f"⚠️ Model {model} failed: {e}")
             last_error = str(e)
             continue
 
-    print("❌ All models failed.")
-    return {"passed": False, "failed_cases": [], "error": f"All models failed. Last error: {last_error}"}
+    logger.error(f"❌ All models failed. Last error: {last_error}")
+    return {
+        "passed": False,
+        "failed_cases": [],
+        "error": f"All models failed. Last error: {last_error}",
+        "_model": "none"
+    }
