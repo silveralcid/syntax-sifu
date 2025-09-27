@@ -1,3 +1,25 @@
+# Environment & secrets
+.env
+*.env
+
+# SQLite databases (if you seed/test locally)
+backend/app/*.db
+backend/challenges/*.db
+
+# Node / frontend (when you add Next.js)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.vercel/
+
+# Logs
+*.log
+backend/*.log
+frontend/*.log
+
+# Editor/IDE extras
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
