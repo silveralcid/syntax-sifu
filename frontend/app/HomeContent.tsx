@@ -1,12 +1,24 @@
 import { useState } from "react";
 import MonacoEditor from "@/components/features/editor/MonacoEditor";
 import SettingsModal from "@/components/features/settings/SettingsModal";
+import ChallengeCounter from "@/components/features/counter/ChallengeCounter";
+import ProgressBar from "@/components/features/progress/ProgressBar";
+import ChallengeCard from "@/components/features/challenges/ChallengeCard";
 
 // Temporary mock categories (replace with real state from HomeContent)
 const mockCategories = [
   { category: "Arrays", count: 10 },
   { category: "Strings", count: 8 },
 ];
+
+const hardcodedChallenge = {
+  id: 8,
+  category: "dates",
+  prompt:
+    "Return true if sprint_deadline is tomorrow. Because Agile is just waterfall in disguise.",
+  fn_name: "sprint_deadline",
+  tests: [{ input: ["2025-09-28"], output: true }],
+};
 
 export default function GridLayout() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -40,25 +52,49 @@ export default function GridLayout() {
           <button className="btn flex-1 h-full">Submit</button>
         </div>
 
-        <div className="card col-span-4 row-span-4 col-start-1 row-start-2">
-          <div className="card-body flex items-center justify-center">3</div>
-        </div>
-        <div className="card col-span-4 row-span-4 col-start-1 row-start-6">
-          <div className="card-body flex items-center justify-center">4</div>
+        {/* Block 3: Challenge prompt */}
+        <div className="col-span-4 row-span-4 col-start-1 row-start-2">
+          <ChallengeCard
+            title="Challenge"
+            content={
+              <>
+                <p>
+                  <strong>[{hardcodedChallenge.category}]</strong>{" "}
+                  {hardcodedChallenge.prompt}
+                </p>
+                <p className="text-xs italic">
+                  Function: <code>{hardcodedChallenge.fn_name}</code>
+                </p>
+              </>
+            }
+          />
         </div>
 
-        {/* Keep blocks 5 and 6 aligned in row 1 on the right */}
-        <div className="card col-start-5 row-start-1">
-          <div className="card-body flex items-center justify-center">5</div>
-        </div>
-        <div className="card col-span-5 col-start-6 row-start-1">
-          <div className="card-body flex items-center justify-center">6</div>
+        {/* Block 4: Test cases */}
+        <div className="col-span-4 row-span-4 col-start-1 row-start-6">
+          <ChallengeCard
+            title="Test Cases"
+            content={
+              <pre className="text-xs whitespace-pre-wrap">
+                {JSON.stringify(hardcodedChallenge.tests, null, 2)}
+              </pre>
+            }
+          />
         </div>
 
-        <div className="card col-span-6 row-span-8 col-start-5 row-start-2">
-          <div className="card-body p-0">
-            <MonacoEditor />
-          </div>
+        {/* Block 5: ChallengeCounter */}
+        <div className="col-start-5 row-start-1">
+          <ChallengeCounter completed={12} total={30} />
+        </div>
+
+        {/* Block 6: ProgressBar */}
+        <div className="col-span-5 col-start-6 row-start-1">
+          <ProgressBar />
+        </div>
+
+        {/* Block 7: MonacoEditor */}
+        <div className="col-span-6 row-span-8 col-start-5 row-start-2">
+          <MonacoEditor />
         </div>
       </div>
 
