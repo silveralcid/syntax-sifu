@@ -1,0 +1,667 @@
+[
+  {
+    "id": 1,
+    "category": "strings",
+    "prompt": "Reverse a string. Unlike Marvel movies, this doesn’t need a reboot every two years.",
+    "fn_name": "reverse_string",
+    "tests": [
+      {"input": ["abc"], "output": "cba"},
+      {"input": ["racecar"], "output": "racecar"}
+    ],
+    "solutions": {
+      "python": "def reverse_string(s):\n    return s[::-1]",
+      "javascript": "function reverseString(s) { return s.split('').reverse().join(''); }",
+      "csharp": "string ReverseString(string s) { char[] arr = s.ToCharArray(); Array.Reverse(arr); return new string(arr); }"
+    }
+  },
+  {
+    "id": 2,
+    "category": "strings",
+    "prompt": "Make everything ALL CAPS, because subtlety is overrated. Just like Elon on Twitter.",
+    "fn_name": "yell",
+    "tests": [
+      {"input": ["hello"], "output": "HELLO"},
+      {"input": ["syntax"], "output": "SYNTAX"}
+    ],
+    "solutions": {
+      "python": "def yell(s):\n    return s.upper()",
+      "javascript": "function yell(s) { return s.toUpperCase(); }",
+      "csharp": "string Yell(string s) { return s.ToUpper(); }"
+    }
+  },
+  {
+    "id": 3,
+    "category": "strings",
+    "prompt": "Return the first character. Play favorites, like Netflix canceling shows after one season.",
+    "fn_name": "first_char",
+    "tests": [
+      {"input": ["hello"], "output": "h"},
+      {"input": ["abc"], "output": "a"}
+    ],
+    "solutions": {
+      "python": "def first_char(s):\n    return s[0] if s else ''",
+      "javascript": "function firstChar(s) { return s.length > 0 ? s[0] : ''; }",
+      "csharp": "string FirstChar(string s) { return string.IsNullOrEmpty(s) ? \"\" : s[0].ToString(); }"
+    }
+  },
+  {
+    "id": 4,
+    "category": "strings",
+    "prompt": "Return the length of a string. Like counting the months you’ve been unemployed.",
+    "fn_name": "string_length",
+    "tests": [
+      {"input": ["hello"], "output": 5},
+      {"input": [""], "output": 0}
+    ],
+    "solutions": {
+      "python": "def string_length(s):\n    return len(s)",
+      "javascript": "function stringLength(s) { return s.length; }",
+      "csharp": "int StringLength(string s) { return s.Length; }"
+    }
+  },
+  {
+    "id": 5,
+    "category": "loops",
+    "prompt": "Print numbers 1 through n. More repetitive than Fast & Furious sequels.",
+    "fn_name": "count_up",
+    "tests": [
+      {"input": [5], "output": [1,2,3,4,5]}
+    ],
+    "solutions": {
+      "python": "def count_up(n):\n    return list(range(1, n+1))",
+      "javascript": "function countUp(n) { let arr = []; for (let i=1;i<=n;i++){arr.push(i);} return arr; }",
+      "csharp": "List<int> CountUp(int n) { var result = new List<int>(); for(int i=1;i<=n;i++){result.Add(i);} return result; }"
+    }
+  },
+  {
+    "id": 6,
+    "category": "loops",
+    "prompt": "Countdown from n to 0, like your motivation after 200 job applications.",
+    "fn_name": "count_down",
+    "tests": [
+      {"input": [3], "output": [3,2,1,0]}
+    ],
+    "solutions": {
+      "python": "def count_down(n):\n    return list(range(n, -1, -1))",
+      "javascript": "function countDown(n) { let arr = []; for (let i=n;i>=0;i--){arr.push(i);} return arr; }",
+      "csharp": "List<int> CountDown(int n) { var result = new List<int>(); for(int i=n;i>=0;i--){result.Add(i);} return result; }"
+    }
+  },
+  {
+    "id": 7,
+    "category": "loops",
+    "prompt": "Loop through skills until someone cares. Base case: nobody cares.",
+    "fn_name": "loop_skills",
+    "tests": [
+      {"input": [3], "output": [1,2,3]}
+    ],
+    "solutions": {
+      "python": "def loop_skills(n):\n    return [i for i in range(1, n+1)]",
+      "javascript": "function loopSkills(n) { let arr=[]; for(let i=1;i<=n;i++){arr.push(i);} return arr; }",
+      "csharp": "List<int> LoopSkills(int n) { var result=new List<int>(); for(int i=1;i<=n;i++){result.Add(i);} return result; }"
+    }
+  },
+  {
+    "id": 8,
+    "category": "loops",
+    "prompt": "Sum numbers from 1 to n. More useful than half your bootcamp projects.",
+    "fn_name": "sum_to_n",
+    "tests": [
+      {"input": [5], "output": 15}
+    ],
+    "solutions": {
+      "python": "def sum_to_n(n):\n    return sum(range(1, n+1))",
+      "javascript": "function sumToN(n) { let total=0; for(let i=1;i<=n;i++){total+=i;} return total; }",
+      "csharp": "int SumToN(int n) { int total=0; for(int i=1;i<=n;i++){total+=i;} return total; }"
+    }
+  },
+  {
+    "id": 9,
+    "category": "lists",
+    "prompt": "Return the first item in a list. Bias is fine, unlike in hiring.",
+    "fn_name": "first_item",
+    "tests": [
+      {"input": [[1,2,3]], "output": 1}
+    ],
+    "solutions": {
+      "python": "def first_item(lst):\n    return lst[0] if lst else None",
+      "javascript": "function firstItem(arr) { return arr.length > 0 ? arr[0] : null; }",
+      "csharp": "int? FirstItem(List<int> arr) { return arr.Count > 0 ? arr[0] : (int?)null; }"
+    }
+  },
+  {
+    "id": 10,
+    "category": "lists",
+    "prompt": "Return the last item in a list. Closure you’ll never get from recruiters.",
+    "fn_name": "last_item",
+    "tests": [
+      {"input": [[10,20,30]], "output": 30}
+    ],
+    "solutions": {
+      "python": "def last_item(lst):\n    return lst[-1] if lst else None",
+      "javascript": "function lastItem(arr) { return arr.length > 0 ? arr[arr.length-1] : null; }",
+      "csharp": "int? LastItem(List<int> arr) { return arr.Count > 0 ? arr[arr.Count-1] : (int?)null; }"
+    }
+  }
+]
+[
+  {
+    "id": 11,
+    "category": "lists",
+    "prompt": "Reverse the list. Unlike your life choices, this one is easy.",
+    "fn_name": "reverse_list",
+    "tests": [
+      {"input": [[1,2,3]], "output": [3,2,1]}
+    ],
+    "solutions": {
+      "python": "def reverse_list(lst):\n    return lst[::-1]",
+      "javascript": "function reverseList(arr) { return arr.slice().reverse(); }",
+      "csharp": "List<int> ReverseList(List<int> arr) { var copy = new List<int>(arr); copy.Reverse(); return copy; }"
+    }
+  },
+  {
+    "id": 12,
+    "category": "lists",
+    "prompt": "Return a list without the first item. Out with the old. Like Twitter engineers.",
+    "fn_name": "chop_first",
+    "tests": [
+      {"input": [[1,2,3]], "output": [2,3]}
+    ],
+    "solutions": {
+      "python": "def chop_first(lst):\n    return lst[1:] if lst else []",
+      "javascript": "function chopFirst(arr) { return arr.slice(1); }",
+      "csharp": "List<int> ChopFirst(List<int> arr) { return arr.Skip(1).ToList(); }"
+    }
+  },
+  {
+    "id": 13,
+    "category": "conditionals",
+    "prompt": "Check if a number is even. If it is, congrats — you’re still not hired.",
+    "fn_name": "is_even",
+    "tests": [
+      {"input": [4], "output": true},
+      {"input": [5], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_even(n):\n    return n % 2 == 0",
+      "javascript": "function isEven(n) { return n % 2 === 0; }",
+      "csharp": "bool IsEven(int n) { return n % 2 == 0; }"
+    }
+  },
+  {
+    "id": 14,
+    "category": "conditionals",
+    "prompt": "Return 'adult' if age >= 18, else 'child'. Too bad neither impress recruiters.",
+    "fn_name": "age_group",
+    "tests": [
+      {"input": [20], "output": "adult"},
+      {"input": [10], "output": "child"}
+    ],
+    "solutions": {
+      "python": "def age_group(age):\n    return 'adult' if age >= 18 else 'child'",
+      "javascript": "function ageGroup(age) { return age >= 18 ? 'adult' : 'child'; }",
+      "csharp": "string AgeGroup(int age) { return age >= 18 ? \"adult\" : \"child\"; }"
+    }
+  },
+  {
+    "id": 15,
+    "category": "conditionals",
+    "prompt": "Return 'hired' if skill_level >= 9000, else 'rejected'. Spoiler: you’re rejected.",
+    "fn_name": "job_status",
+    "tests": [
+      {"input": [5000], "output": "rejected"},
+      {"input": [10000], "output": "hired"}
+    ],
+    "solutions": {
+      "python": "def job_status(skill_level):\n    return 'hired' if skill_level >= 9000 else 'rejected'",
+      "javascript": "function jobStatus(skill) { return skill >= 9000 ? 'hired' : 'rejected'; }",
+      "csharp": "string JobStatus(int skill) { return skill >= 9000 ? \"hired\" : \"rejected\"; }"
+    }
+  },
+  {
+    "id": 16,
+    "category": "conditionals",
+    "prompt": "FizzBuzz. Childhood trauma and interview trauma in one package.",
+    "fn_name": "fizzbuzz",
+    "tests": [
+      {"input": [3], "output": "fizz"},
+      {"input": [5], "output": "buzz"},
+      {"input": [15], "output": "fizzbuzz"}
+    ],
+    "solutions": {
+      "python": "def fizzbuzz(n):\n    if n % 15 == 0: return 'fizzbuzz'\n    elif n % 3 == 0: return 'fizz'\n    elif n % 5 == 0: return 'buzz'\n    else: return str(n)",
+      "javascript": "function fizzbuzz(n) { if (n%15===0) return 'fizzbuzz'; if (n%3===0) return 'fizz'; if (n%5===0) return 'buzz'; return n.toString(); }",
+      "csharp": "string FizzBuzz(int n) { if(n%15==0) return \"fizzbuzz\"; if(n%3==0) return \"fizz\"; if(n%5==0) return \"buzz\"; return n.ToString(); }"
+    }
+  },
+  {
+    "id": 17,
+    "category": "recursion",
+    "prompt": "Factorial(n). Because loops are for quitters, like quitting your job search.",
+    "fn_name": "factorial",
+    "tests": [
+      {"input": [5], "output": 120}
+    ],
+    "solutions": {
+      "python": "def factorial(n):\n    return 1 if n == 0 else n * factorial(n-1)",
+      "javascript": "function factorial(n) { return n===0 ? 1 : n*factorial(n-1); }",
+      "csharp": "int Factorial(int n) { return n==0 ? 1 : n*Factorial(n-1); }"
+    }
+  },
+  {
+    "id": 18,
+    "category": "recursion",
+    "prompt": "Apply recursively until you get an interview. Base case: never.",
+    "fn_name": "apply_jobs",
+    "tests": [
+      {"input": [0], "output": "still unemployed"}
+    ],
+    "solutions": {
+      "python": "def apply_jobs(n):\n    if n == 0:\n        return 'still unemployed'\n    return apply_jobs(n-1)",
+      "javascript": "function applyJobs(n) { if(n===0) return 'still unemployed'; return applyJobs(n-1); }",
+      "csharp": "string ApplyJobs(int n) { if(n==0) return \"still unemployed\"; return ApplyJobs(n-1); }"
+    }
+  },
+  {
+    "id": 19,
+    "category": "recursion",
+    "prompt": "Fibonacci(n). Like Netflix reboots — recursive and unnecessary.",
+    "fn_name": "fibonacci",
+    "tests": [
+      {"input": [6], "output": 8}
+    ],
+    "solutions": {
+      "python": "def fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "javascript": "function fibonacci(n) { if(n<=1) return n; return fibonacci(n-1)+fibonacci(n-2); }",
+      "csharp": "int Fibonacci(int n) { if(n<=1) return n; return Fibonacci(n-1)+Fibonacci(n-2); }"
+    }
+  },
+  {
+    "id": 20,
+    "category": "classes",
+    "prompt": "Make an Animal class. Subclass Dog. Dog goes 'bark'. Unlike you, it gets callbacks.",
+    "fn_name": "Dog",
+    "tests": [
+      {"input": [], "output": "bark"}
+    ],
+    "solutions": {
+      "python": "class Animal:\n    pass\n\nclass Dog(Animal):\n    def sound(self):\n        return 'bark'",
+      "javascript": "class Animal {}\nclass Dog extends Animal { sound(){ return 'bark'; } }",
+      "csharp": "class Animal {}\nclass Dog : Animal { public string Sound(){ return \"bark\"; } }"
+    }
+  }
+]
+[
+  {
+    "id": 21,
+    "category": "classes",
+    "prompt": "Make a Car class with drive() → 'vroom'. Elon Musk is typing…",
+    "fn_name": "Car",
+    "tests": [
+      {"input": [], "output": "vroom"}
+    ],
+    "solutions": {
+      "python": "class Car:\n    def drive(self):\n        return 'vroom'",
+      "javascript": "class Car { drive(){ return 'vroom'; } }",
+      "csharp": "class Car { public string Drive(){ return \"vroom\"; } }"
+    }
+  },
+  {
+    "id": 22,
+    "category": "classes",
+    "prompt": "Make a Student class with a name and greet() → 'Hi, I am NAME'.",
+    "fn_name": "Student",
+    "tests": [
+      {"input": ["Alice"], "output": "Hi, I am Alice"}
+    ],
+    "solutions": {
+      "python": "class Student:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return f'Hi, I am {self.name}'",
+      "javascript": "class Student { constructor(name){ this.name=name; } greet(){ return `Hi, I am ${this.name}`; } }",
+      "csharp": "class Student { public string Name; public Student(string name){ Name=name; } public string Greet(){ return $\"Hi, I am {Name}\"; } }"
+    }
+  },
+  {
+    "id": 23,
+    "category": "classes",
+    "prompt": "Make a Recruiter class with ghost() → true. Because of course.",
+    "fn_name": "Recruiter",
+    "tests": [
+      {"input": [], "output": true}
+    ],
+    "solutions": {
+      "python": "class Recruiter:\n    def ghost(self):\n        return True",
+      "javascript": "class Recruiter { ghost(){ return true; } }",
+      "csharp": "class Recruiter { public bool Ghost(){ return true; } }"
+    }
+  },
+  {
+    "id": 24,
+    "category": "unit tests",
+    "prompt": "Write pytest tests for is_even(n). Even this needs tests, apparently.",
+    "fn_name": "test_is_even",
+    "tests": [
+      {"input": [2], "output": true},
+      {"input": [3], "output": false}
+    ],
+    "solutions": {
+      "python": "def test_is_even():\n    assert is_even(2) == True\n    assert is_even(3) == False",
+      "javascript": "function testIsEven(){ console.assert(isEven(2)===true); console.assert(isEven(3)===false); }",
+      "csharp": "// Pseudo-test\nvoid TestIsEven(){ Debug.Assert(IsEven(2)==true); Debug.Assert(IsEven(3)==false); }"
+    }
+  },
+  {
+    "id": 25,
+    "category": "unit tests",
+    "prompt": "Write tests for reverse_string(s). QA is watching.",
+    "fn_name": "test_reverse_string",
+    "tests": [
+      {"input": ["abc"], "output": "cba"}
+    ],
+    "solutions": {
+      "python": "def test_reverse_string():\n    assert reverse_string('abc') == 'cba'",
+      "javascript": "function testReverseString(){ console.assert(reverseString('abc')==='cba'); }",
+      "csharp": "// Pseudo-test\nvoid TestReverseString(){ Debug.Assert(ReverseString(\"abc\")==\"cba\"); }"
+    }
+  },
+  {
+    "id": 26,
+    "category": "unit tests",
+    "prompt": "Test factorial. Don’t forget 0! = 1, or math teachers cry.",
+    "fn_name": "test_factorial",
+    "tests": [
+      {"input": [5], "output": 120}
+    ],
+    "solutions": {
+      "python": "def test_factorial():\n    assert factorial(5)==120\n    assert factorial(0)==1",
+      "javascript": "function testFactorial(){ console.assert(factorial(5)===120); console.assert(factorial(0)===1); }",
+      "csharp": "// Pseudo-test\nvoid TestFactorial(){ Debug.Assert(Factorial(5)==120); Debug.Assert(Factorial(0)==1); }"
+    }
+  },
+  {
+    "id": 27,
+    "category": "regex",
+    "prompt": "Match a valid email. No, 'asdf' doesn’t count.",
+    "fn_name": "is_email",
+    "tests": [
+      {"input": ["user@example.com"], "output": true},
+      {"input": ["not-an-email"], "output": false}
+    ],
+    "solutions": {
+      "python": "import re\ndef is_email(s):\n    return re.match(r'^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$', s) is not None",
+      "javascript": "function isEmail(s){ return /^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(s); }",
+      "csharp": "using System.Text.RegularExpressions;\nbool IsEmail(string s){ return Regex.IsMatch(s, @\"^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$\"); }"
+    }
+  },
+  {
+    "id": 28,
+    "category": "regex",
+    "prompt": "Extract digits from a string. Because numbers hide too.",
+    "fn_name": "extract_digits",
+    "tests": [
+      {"input": ["abc123"], "output": "123"}
+    ],
+    "solutions": {
+      "python": "import re\ndef extract_digits(s):\n    return ''.join(re.findall(r'\\d+', s))",
+      "javascript": "function extractDigits(s){ return (s.match(/\\d+/g)||[]).join(''); }",
+      "csharp": "using System.Text.RegularExpressions;\nstring ExtractDigits(string s){ return string.Concat(Regex.Matches(s, @\"\\d+\").Select(m=>m.Value)); }"
+    }
+  },
+  {
+    "id": 29,
+    "category": "regex",
+    "prompt": "Check if a string is all uppercase. Respect the Caps Lock warrior.",
+    "fn_name": "is_uppercase",
+    "tests": [
+      {"input": ["HELLO"], "output": true},
+      {"input": ["Hi"], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_uppercase(s):\n    return s.isupper()",
+      "javascript": "function isUppercase(s){ return s === s.toUpperCase(); }",
+      "csharp": "bool IsUppercase(string s){ return s.Equals(s.ToUpper()); }"
+    }
+  },
+  {
+    "id": 30,
+    "category": "regex",
+    "prompt": "Match a hashtag (e.g., #blessed). Because you’re basically coding on Twitter anyway.",
+    "fn_name": "is_hashtag",
+    "tests": [
+      {"input": ["#sifu"], "output": true},
+      {"input": ["notahashtag"], "output": false}
+    ],
+    "solutions": {
+      "python": "import re\ndef is_hashtag(s):\n    return re.match(r'^#\\w+$', s) is not None",
+      "javascript": "function isHashtag(s){ return /^#\\w+$/.test(s); }",
+      "csharp": "using System.Text.RegularExpressions;\nbool IsHashtag(string s){ return Regex.IsMatch(s, @\"^#\\w+$\"); }"
+    }
+  }
+]
+[
+  {
+    "id": 31,
+    "category": "file interaction",
+    "prompt": "Write a function to save text to 'output.txt'. Yes, actual files exist.",
+    "fn_name": "save_text",
+    "tests": [
+      {"input": ["hello"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_text(s):\n    with open('output.txt','w') as f:\n        f.write(s)\n    return 'ok'",
+      "javascript": "const fs = require('fs');\nfunction saveText(s){ fs.writeFileSync('output.txt', s); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveText(string s){ File.WriteAllText(\"output.txt\", s); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 32,
+    "category": "file interaction",
+    "prompt": "Read from 'input.txt' and return contents. Ancient tech, still relevant.",
+    "fn_name": "read_text",
+    "tests": [
+      {"input": [], "output": "dummy"}
+    ],
+    "solutions": {
+      "python": "def read_text():\n    with open('input.txt','r') as f:\n        return f.read()",
+      "javascript": "const fs = require('fs');\nfunction readText(){ return fs.readFileSync('input.txt','utf8'); }",
+      "csharp": "using System.IO;\nstring ReadText(){ return File.ReadAllText(\"input.txt\"); }"
+    }
+  },
+  {
+    "id": 33,
+    "category": "file interaction",
+    "prompt": "Append a line to 'log.txt'. Pretend you’re logging bugs.",
+    "fn_name": "append_log",
+    "tests": [
+      {"input": ["crash"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def append_log(s):\n    with open('log.txt','a') as f:\n        f.write(s + '\\n')\n    return 'ok'",
+      "javascript": "const fs = require('fs');\nfunction appendLog(s){ fs.appendFileSync('log.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring AppendLog(string s){ File.AppendAllText(\"log.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 34,
+    "category": "conditionals",
+    "prompt": "Return the larger of two numbers. Pick a favorite, like Netflix canceling the other.",
+    "fn_name": "max_of_two",
+    "tests": [
+      {"input": [3,7], "output": 7}
+    ],
+    "solutions": {
+      "python": "def max_of_two(a,b):\n    return a if a>b else b",
+      "javascript": "function maxOfTwo(a,b){ return a>b ? a : b; }",
+      "csharp": "int MaxOfTwo(int a,int b){ return a>b ? a : b; }"
+    }
+  },
+  {
+    "id": 35,
+    "category": "math",
+    "prompt": "Return n squared. High school flashbacks.",
+    "fn_name": "square",
+    "tests": [
+      {"input": [4], "output": 16}
+    ],
+    "solutions": {
+      "python": "def square(n):\n    return n*n",
+      "javascript": "function square(n){ return n*n; }",
+      "csharp": "int Square(int n){ return n*n; }"
+    }
+  },
+  {
+    "id": 36,
+    "category": "math",
+    "prompt": "Check if n is prime. Prove you paid attention in class.",
+    "fn_name": "is_prime",
+    "tests": [
+      {"input": [7], "output": true},
+      {"input": [8], "output": false}
+    ],
+    "solutions": {
+      "python": "def is_prime(n):\n    if n<=1: return False\n    for i in range(2,int(n**0.5)+1):\n        if n%i==0: return False\n    return True",
+      "javas
+
+[
+  {
+    "id": 41,
+    "category": "strings",
+    "prompt": "Capitalize the first letter of every word. Maybe if your resume looked this polished, you’d get a callback.",
+    "fn_name": "title_case",
+    "tests": [
+      {"input": ["syntax sifu"], "output": "Syntax Sifu"}
+    ],
+    "solutions": {
+      "python": "def title_case(s):\n    return s.title()",
+      "javascript": "function titleCase(s){ return s.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' '); }",
+      "csharp": "string TitleCase(string s){ return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s); }"
+    }
+  },
+  {
+    "id": 42,
+    "category": "loops",
+    "prompt": "Count how many applications you’ve sent. Just kidding — infinite loop, because you’re never hearing back.",
+    "fn_name": "count_apps",
+    "tests": [
+      {"input": [3], "output": [1,2,3]}
+    ],
+    "solutions": {
+      "python": "def count_apps(n):\n    return list(range(1,n+1))",
+      "javascript": "function countApps(n){ let arr=[]; for(let i=1;i<=n;i++){arr.push(i);} return arr; }",
+      "csharp": "List<int> CountApps(int n){ var result=new List<int>(); for(int i=1;i<=n;i++){ result.Add(i);} return result; }"
+    }
+  },
+  {
+    "id": 43,
+    "category": "conditionals",
+    "prompt": "Check if GPA >= 4.0. Too bad hiring managers only care about LeetCode clout.",
+    "fn_name": "check_gpa",
+    "tests": [
+      {"input": [4.0], "output": true},
+      {"input": [2.5], "output": false}
+    ],
+    "solutions": {
+      "python": "def check_gpa(g):\n    return g>=4.0",
+      "javascript": "function checkGpa(g){ return g>=4.0; }",
+      "csharp": "bool CheckGpa(double g){ return g>=4.0; }"
+    }
+  },
+  {
+    "id": 44,
+    "category": "recursion",
+    "prompt": "Simulate sending resumes until someone replies. Base case: nobody replies.",
+    "fn_name": "send_resumes",
+    "tests": [
+      {"input": [0], "output": "no reply"}
+    ],
+    "solutions": {
+      "python": "def send_resumes(n):\n    if n==0: return 'no reply'\n    return send_resumes(n-1)",
+      "javascript": "function sendResumes(n){ if(n===0) return 'no reply'; return sendResumes(n-1); }",
+      "csharp": "string SendResumes(int n){ if(n==0) return \"no reply\"; return SendResumes(n-1); }"
+    }
+  },
+  {
+    "id": 45,
+    "category": "classes",
+    "prompt": "Make a Superhero class with catchphrase() → 'I am Batman'. Don’t forget the gravelly voice.",
+    "fn_name": "Superhero",
+    "tests": [
+      {"input": [], "output": "I am Batman"}
+    ],
+    "solutions": {
+      "python": "class Superhero:\n    def catchphrase(self):\n        return 'I am Batman'",
+      "javascript": "class Superhero { catchphrase(){ return 'I am Batman'; } }",
+      "csharp": "class Superhero { public string Catchphrase(){ return \"I am Batman\"; } }"
+    }
+  },
+  {
+    "id": 46,
+    "category": "unit tests",
+    "prompt": "Write a test that always fails. Just like your interviews.",
+    "fn_name": "test_fail",
+    "tests": [
+      {"input": [], "output": false}
+    ],
+    "solutions": {
+      "python": "def test_fail():\n    assert False",
+      "javascript": "function testFail(){ console.assert(false); }",
+      "csharp": "// Pseudo-test\nvoid TestFail(){ Debug.Assert(false); }"
+    }
+  },
+  {
+    "id": 47,
+    "category": "regex",
+    "prompt": "Validate a LinkedIn URL. Not that it’ll help you get noticed.",
+    "fn_name": "is_linkedin",
+    "tests": [
+      {"input": ["https://linkedin.com/in/sifu"], "output": true},
+      {"input": ["https://myspace.com/sifu"], "output": false}
+    ],
+    "solutions": {
+      "python": "import re\ndef is_linkedin(s):\n    return re.match(r'^https://(www\\.)?linkedin\\.com/in/.+', s) is not None",
+      "javascript": "function isLinkedin(s){ return /^https:\\/\\/(www\\.)?linkedin\\.com\\/in\\/.+/.test(s); }",
+      "csharp": "using System.Text.RegularExpressions;\nbool IsLinkedin(string s){ return Regex.IsMatch(s, @\"^https://(www\\.)?linkedin\\.com/in/.+\"); }"
+    }
+  },
+  {
+    "id": 48,
+    "category": "file interaction",
+    "prompt": "Write your rejection letters to 'archive.txt'. It’s going to be a big file.",
+    "fn_name": "save_rejections",
+    "tests": [
+      {"input": ["Sorry, not a fit"], "output": "ok"}
+    ],
+    "solutions": {
+      "python": "def save_rejections(s):\n    with open('archive.txt','a') as f:\n        f.write(s+'\\n')\n    return 'ok'",
+      "javascript": "const fs=require('fs');\nfunction saveRejections(s){ fs.appendFileSync('archive.txt', s+'\\n'); return 'ok'; }",
+      "csharp": "using System.IO;\nstring SaveRejections(string s){ File.AppendAllText(\"archive.txt\", s+\"\\n\"); return \"ok\"; }"
+    }
+  },
+  {
+    "id": 49,
+    "category": "boolean logic",
+    "prompt": "Return true if you have a job, false otherwise. Guess the output.",
+    "fn_name": "has_job",
+    "tests": [
+      {"input": [], "output": false}
+    ],
+    "solutions": {
+      "python": "def has_job():\n    return False",
+      "javascript": "function hasJob(){ return false; }",
+      "csharp": "bool HasJob(){ return false; }"
+    }
+  },
+  {
+    "id": 50,
+    "category": "math",
+    "prompt": "Calculate your salary offer. Multiply years of experience by 0.",
+    "fn_name": "salary_offer",
+    "tests": [
+      {"input": [5], "output": 0}
+    ],
+    "solutions": {
+      "python": "def salary_offer(n):\n    return n*0",
+      "javascript": "function salaryOffer(n){ return 0; }",
+      "csharp": "int SalaryOffer(int n){ return 0; }"
+    }
+  }
+]
