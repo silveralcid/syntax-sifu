@@ -3,9 +3,6 @@
 import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 
-type Category = string | { category: string };
-
-
 // Types for API responses
 interface ValidationResult {
   passed: boolean;
@@ -27,65 +24,57 @@ interface Challenge {
   tests: { input: unknown[]; output: unknown }[];
 }
 
-export default function HomeContent() {
+interface Category {
+  category: string;
+  count: number;
+}
+
+export default function Home() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
-  const [currentChallenge, setCurrentChallenge] = useState<Challenge | null>(
-    null
-  );
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [code, setCode] = useState("// Write your code here...");
   const [result, setResult] = useState<SubmitResponse | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [language, setLanguage] = useState<"python" | "javascript" | "csharp">(
+    "python"
+  );
 
   // fetch categories on mount
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`)
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setCategories(data);
-        } else if (data.categories) {
-          setCategories(data.categories);
-        }
+        // backend already returns array of {category, count}
+        setCategories(data);
       })
       .catch((err) => console.error("Error fetching categories:", err));
   }, []);
 
   // fetch challenges
   const fetchChallenges = async () => {
-    if (selectedCategories.length === 0) {
-      alert("Pick at least one category!");
-      return;
-    }
+    if (selectedCategories.length === 0) return;
 
     const query = selectedCategories.join(",");
-    setLoading(true);
-
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/challenges?category=${query}&limit=5&shuffle=true`
       );
       const data: Challenge[] = await res.json();
-      console.log("Fetched challenges:", data);
-
       setChallenges(data);
-      setCurrentChallenge(data[0] || null);
+      setCurrentIndex(0);
+      setResult(null);
+      setCode("// Write your code here...");
     } catch (err) {
       console.error("Error fetching challenges:", err);
-    } finally {
-      setLoading(false);
     }
   };
 
-  // run code against backend
-  const handleRunCode = async () => {
-    if (!currentChallenge) {
-      alert("No challenge loaded yet!");
-      return;
-    }
+  const currentChallenge =
+    challenges.length > 0 ? challenges[currentIndex] : null;
 
-    setLoading(true);
+  const handleRunCode = async () => {
+    if (!currentChallenge) return;
 
     try {
       const res = await fetch(
@@ -96,19 +85,15 @@ export default function HomeContent() {
           body: JSON.stringify({
             code,
             fn_name: currentChallenge.fn_name,
-            language: "python", // default for now
+            language: language,
             tests: currentChallenge.tests,
           }),
         }
       );
       const data: SubmitResponse = await res.json();
-      console.log("Run code result:", data);
-
       setResult(data);
     } catch (err) {
       console.error("Error submitting code:", err);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -120,6 +105,22 @@ export default function HomeContent() {
     );
   };
 
+  const nextChallenge = () => {
+    if (currentIndex < challenges.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      setResult(null);
+      setCode("// Write your code here...");
+    }
+  };
+
+  const prevChallenge = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      setResult(null);
+      setCode("// Write your code here...");
+    }
+  };
+
   return (
     <main className="p-6 space-y-4">
       <h1 className="text-2xl font-bold">Syntax Sifu 🥋</h1>
@@ -127,41 +128,35 @@ export default function HomeContent() {
       {/* Category selection */}
       <div>
         <h2>Select Categories:</h2>
-        {categories.map((c, idx) => {
-          const value = typeof c === "string" ? c : c.category;
-          return (
-            <label key={`${value}-${idx}`} style={{ marginRight: "1rem" }}>
-              <input
-                type="checkbox"
-                value={value}
-                checked={selectedCategories.includes(value)}
-                onChange={() => toggleCategory(value)}
-              />
-              {value}
-            </label>
-          );
-        })}
-
+        {categories.map((c, idx) => (
+          <label key={`${c.category}-${idx}`} style={{ marginRight: "1rem" }}>
+            <input
+              type="checkbox"
+              value={c.category}
+              checked={selectedCategories.includes(c.category)}
+              onChange={() => toggleCategory(c.category)}
+            />
+            {c.category} ({c.count})
+          </label>
+        ))}
         <button onClick={fetchChallenges}>Load Challenges</button>
       </div>
 
-      {/* Challenge list */}
+      {/* Playlist of loaded challenges */}
       {challenges.length > 0 && (
         <div>
-          <h2>Challenges:</h2>
+          <h2>Challenge Playlist:</h2>
           <ul>
-            {challenges.map((ch) => (
-              <li key={ch.id}>
-                <button onClick={() => setCurrentChallenge(ch)}>
-                  {ch.prompt}
-                </button>
+            {challenges.map((ch, idx) => (
+              <li key={`${ch.id}-${idx}`}>
+                {idx + 1}. [{ch.category}] {ch.prompt}
               </li>
             ))}
           </ul>
         </div>
       )}
 
-      {/* Challenge display */}
+      {/* Current Challenge */}
       {currentChallenge && (
         <div>
           <h2>Current Challenge:</h2>
@@ -169,6 +164,21 @@ export default function HomeContent() {
           <pre>{JSON.stringify(currentChallenge.tests, null, 2)}</pre>
         </div>
       )}
+
+      {/* Language Selector */}
+      <div>
+        <label className="mr-2">Language:</label>
+        <select
+          value={language}
+          onChange={(e) =>
+            setLanguage(e.target.value as "python" | "javascript" | "csharp")
+          }
+        >
+          <option value="python">Python</option>
+          <option value="javascript">JavaScript</option>
+          <option value="csharp">C#</option>
+        </select>
+      </div>
 
       {/* Monaco editor */}
       <Editor
@@ -178,9 +188,18 @@ export default function HomeContent() {
         onChange={(value) => setCode(value || "")}
       />
 
-      <button onClick={handleRunCode} disabled={loading}>
-        {loading ? "Working..." : "Run Code"}
-      </button>
+      <div className="space-x-2">
+        <button onClick={prevChallenge} disabled={currentIndex === 0}>
+          Previous Challenge
+        </button>
+        <button onClick={handleRunCode}>Run Code</button>
+        <button
+          onClick={nextChallenge}
+          disabled={currentIndex >= challenges.length - 1}
+        >
+          Next Challenge
+        </button>
+      </div>
 
       {/* Results */}
       {result && (
