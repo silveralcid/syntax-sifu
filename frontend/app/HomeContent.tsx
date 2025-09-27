@@ -192,7 +192,8 @@ export default function Home() {
           <>
             <p>
               <strong>[{currentChallenge.category}]</strong>{" "}
-              {currentChallenge.prompt}
+              {currentChallenge.prompt}{" "}
+              <em>(Function name: <code>{currentChallenge.fn_name}</code>)</em>
             </p>
             <pre>{JSON.stringify(currentChallenge.tests, null, 2)}</pre>
           </>
