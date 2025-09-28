@@ -22,8 +22,10 @@ export default function TestCases({ tests }: TestCasesProps) {
           {tests.map((_, i) => (
             <li key={i} className="flex-1">
               <button
-                className={`w-full flex items-center justify-center ${
-                  i === selectedIndex ? "active" : ""
+                className={`w-full flex items-center justify-center py-2 ${
+                  i === selectedIndex
+                    ? "bg-primary text-primary-content font-semibold border-primary"
+                    : "hover:bg-base-200"
                 }`}
                 onClick={() => setSelectedIndex(i)}
               >
