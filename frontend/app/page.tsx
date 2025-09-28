@@ -1,6 +1,7 @@
 import MonacoEditorWrapper from "@/components/MonacoEditorWrapper";
 import ChallengeCard from "@/components/ChallengeCard";
 import TestCases from "@/components/TestCases";
+import ChallengeControls from "@/components/ChallengeControls";
 
 const challenge = {
   tests: [
@@ -33,7 +34,7 @@ export default function Home() {
 
           {/* Right column middle half (now Box 3, keep small size) */}
           <div className="rounded-3xl col-span-2 row-start-3 col-start-4 bg-blue-300 flex items-center justify-center">
-            3
+            <ChallengeControls />
           </div>
 
           {/* Bottom right (now TestCases, keep tall size) */}
