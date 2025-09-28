@@ -5,28 +5,24 @@ import MonacoEditorWrapper from "@/components/MonacoEditorWrapper";
 import ChallengeCard from "@/components/ChallengeCard";
 import TestCases from "@/components/TestCases";
 import ChallengeControls from "@/components/ChallengeControls";
-
-import { Challenge } from "@/types/challenge";
-
-interface Submission {
-  challengeId: number;
-  category: string;
-  prompt: string;
-  code: string;
-}
+import ResultModal from "@/components/ResultModal";
+import type { Challenge } from "@/types/challenge";
+import type { SubmitResponse } from "@/types/submit";
 
 export default function Home() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [userCode, setUserCode] = useState<string>(""); // from Monaco
-  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [userCode, setUserCode] = useState<string>("");
+  const [results, setResults] = useState<SubmitResponse | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const currentChallenge = challenges[currentIndex];
 
   const handleLoad = (newChallenges: Challenge[]) => {
     setChallenges(newChallenges);
     setCurrentIndex(0);
-    setUserCode(""); // reset editor
+    setUserCode("");
   };
 
   const handleSkip = () => {
@@ -34,25 +30,46 @@ export default function Home() {
     setUserCode("");
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!currentChallenge) return;
 
-    // Append submission
-    setSubmissions((prev) => [
-      ...prev,
-      {
-        challengeId: currentChallenge.id,
-        category: currentChallenge.category,
-        prompt: currentChallenge.prompt,
-        code: userCode,
-      },
-    ]);
+    // Pause timer
+    setPaused(true);
 
-    console.log("All submissions so far:", submissions);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/submit_code/`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            code: userCode,
+            fn_name: currentChallenge.fn_name,
+            language: "python", // can make dynamic later
+            tests: currentChallenge.tests,
+            prompt: currentChallenge.prompt,
+          }),
+        }
+      );
+
+      const data: SubmitResponse = await res.json();
+      setResults(data);
+      setModalOpen(true);
+    } catch (err) {
+      console.error("Error submitting code:", err);
+    }
+  };
+
+  const handleNext = () => {
+    setModalOpen(false);
+    setResults(null);
 
     // Move to next challenge
     setCurrentIndex((i) => (i + 1 < challenges.length ? i + 1 : 0));
     setUserCode("");
+
+    // Resume timer
+    setPaused(false);
   };
 
   return (
@@ -71,8 +88,8 @@ export default function Home() {
             />
           </div>
 
-          {/* Right column top half: Challenge card */}
-          <div className="rounded-3xl col-span-2 row-span-2 col-start-4 flex items-center justify-center">
+          {/* Challenge card */}
+          <div className="rounded-3xl col-span-2 row-span-2 col-start-4 flex items-center justify-center bg-base-200">
             {currentChallenge ? (
               <ChallengeCard
                 category={currentChallenge.category}
@@ -85,18 +102,19 @@ export default function Home() {
             )}
           </div>
 
-          {/* Right column middle half: Controls */}
-          <div className="rounded-3xl col-span-2 row-start-3 col-start-4 flex items-center justify-center">
+          {/* Controls */}
+          <div className="rounded-3xl col-span-2 row-start-3 col-start-4 bg-base-200 flex items-center justify-center">
             <ChallengeControls
               onSkip={handleSkip}
               onSubmit={handleSubmit}
               onSettingsLoad={handleLoad}
               hasChallenges={challenges.length > 0}
+              paused={paused}
             />
           </div>
 
-          {/* Bottom right: Test cases */}
-          <div className="rounded-3xl col-span-2 row-span-2 row-start-4 col-start-4 flex items-center justify-center">
+          {/* Test cases */}
+          <div className="rounded-3xl col-span-2 row-span-2 row-start-4 col-start-4 bg-base-200 flex items-center justify-center">
             {currentChallenge?.tests ? (
               <TestCases tests={currentChallenge.tests} />
             ) : (
@@ -105,6 +123,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Result Modal */}
+      <ResultModal isOpen={modalOpen} onClose={handleNext} results={results} />
     </main>
   );
 }

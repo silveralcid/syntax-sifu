@@ -8,8 +8,9 @@ interface ChallengeControlsProps {
   onSkip?: () => void;
   onSubmit?: () => void;
   onSettingsLoad: (challenges: Challenge[]) => void;
-  hasChallenges: boolean; // 👈 new
-  duration?: number;
+  hasChallenges: boolean;
+  paused?: boolean; // 👈 pause the timer from parent
+  duration?: number; // default duration
 }
 
 export default function ChallengeControls({
@@ -17,12 +18,13 @@ export default function ChallengeControls({
   onSubmit,
   onSettingsLoad,
   hasChallenges,
+  paused = false, // 👈 make sure it's destructured with a default
   duration = 120,
 }: ChallengeControlsProps) {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Reset timer whenever new challenges are loaded
+  // Reset timer whenever challenges are (re)loaded
   useEffect(() => {
     if (hasChallenges) {
       setTimeLeft(duration);
@@ -31,17 +33,23 @@ export default function ChallengeControls({
 
   // Countdown effect
   useEffect(() => {
-    if (!hasChallenges || timeLeft <= 0) return;
+    if (!hasChallenges || paused || timeLeft <= 0) return;
 
     const interval = setInterval(() => setTimeLeft((t) => t - 1), 1000);
     return () => clearInterval(interval);
-  }, [timeLeft, hasChallenges]);
+  }, [timeLeft, hasChallenges, paused]);
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4 p-4">
       {/* Timer */}
       {hasChallenges ? (
-        <span className="badge badge-lg badge-primary">{timeLeft}s</span>
+        <span
+          className={`badge badge-lg ${
+            timeLeft <= 10 ? "badge-error" : "badge-primary"
+          }`}
+        >
+          {timeLeft}s
+        </span>
       ) : (
         <span className="badge badge-lg">Waiting for challenge...</span>
       )}
