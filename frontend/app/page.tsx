@@ -77,6 +77,8 @@ export default function Home() {
               <ChallengeCard
                 category={currentChallenge.category}
                 prompt={currentChallenge.prompt}
+                currentIndex={currentIndex}
+                total={challenges.length}
               />
             ) : (
               <p className="text-sm text-gray-500">No challenge loaded</p>
