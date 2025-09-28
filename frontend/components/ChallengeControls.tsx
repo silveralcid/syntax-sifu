@@ -9,8 +9,10 @@ interface ChallengeControlsProps {
   onSubmit?: () => void;
   onSettingsLoad: (challenges: Challenge[]) => void;
   hasChallenges: boolean;
-  paused?: boolean; // 👈 pause the timer from parent
-  duration?: number; // default duration
+  paused?: boolean;
+  duration?: number;
+  onTimeout?: () => void;
+  onTick?: (time: number) => void;
 }
 
 export default function ChallengeControls({
@@ -18,24 +20,35 @@ export default function ChallengeControls({
   onSubmit,
   onSettingsLoad,
   hasChallenges,
-  paused = false, // 👈 make sure it's destructured with a default
+  paused = false,
   duration = 120,
+  onTimeout,
+  onTick,
 }: ChallengeControlsProps) {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Reset timer whenever challenges are (re)loaded
+  // Reset timer when challenges are loaded
   useEffect(() => {
     if (hasChallenges) {
       setTimeLeft(duration);
     }
   }, [hasChallenges, duration]);
 
+  // Notify parent when timeLeft changes
+  useEffect(() => {
+    onTick?.(timeLeft);
+    if (timeLeft === 0 && onTimeout) onTimeout();
+  }, [timeLeft, onTick, onTimeout]);
+
   // Countdown effect
   useEffect(() => {
     if (!hasChallenges || paused || timeLeft <= 0) return;
 
-    const interval = setInterval(() => setTimeLeft((t) => t - 1), 1000);
+    const interval = setInterval(() => {
+      setTimeLeft((t) => t - 1);
+    }, 1000);
+
     return () => clearInterval(interval);
   }, [timeLeft, hasChallenges, paused]);
 

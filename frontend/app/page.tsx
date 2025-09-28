@@ -6,6 +6,7 @@ import ChallengeCard from "@/components/ChallengeCard";
 import TestCases from "@/components/TestCases";
 import ChallengeControls from "@/components/ChallengeControls";
 import ResultModal from "@/components/ResultModal";
+import CompletionModal from "@/components/CompletionModal";
 import type { Challenge } from "@/types/challenge";
 import type { SubmitResponse } from "@/types/submit";
 
@@ -13,24 +14,43 @@ export default function Home() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userCode, setUserCode] = useState<string>("");
+
   const [results, setResults] = useState<SubmitResponse | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [completed, setCompleted] = useState(0);
+  const [completionOpen, setCompletionOpen] = useState(false);
+  const [completionReason, setCompletionReason] = useState<
+    "timeout" | "finished"
+  >("finished");
+  const [timeLeft, setTimeLeft] = useState(120); // sync with ChallengeControls duration
 
   const currentChallenge = challenges[currentIndex];
+
+  const handleTimeout = () => {
+    setCompletionReason("timeout");
+    setCompletionOpen(true);
+  };
 
   const handleLoad = (newChallenges: Challenge[]) => {
     setChallenges(newChallenges);
     setCurrentIndex(0);
     setUserCode("");
+    setCompleted(0);
+    setCompletionOpen(false);
   };
 
   const handleSkip = () => {
-    setCurrentIndex((i) => (i + 1 < challenges.length ? i + 1 : 0));
+    if (currentIndex + 1 >= challenges.length) {
+      setCompletionReason("finished");
+      setCompletionOpen(true);
+      return;
+    }
+    setCurrentIndex((i) => i + 1);
     setUserCode("");
   };
-
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (!currentChallenge) return;
@@ -69,11 +89,19 @@ export default function Home() {
     setModalOpen(false);
     setResults(null);
 
-    // Move to next challenge
-    setCurrentIndex((i) => (i + 1 < challenges.length ? i + 1 : 0));
-    setUserCode("");
+    // Mark as completed
+    setCompleted((c) => c + 1);
 
-    // Resume timer
+    // Finished queue
+    if (currentIndex + 1 >= challenges.length) {
+      setCompletionReason("finished");
+      setCompletionOpen(true);
+      return;
+    }
+
+    // Move to next challenge
+    setCurrentIndex((i) => i + 1);
+    setUserCode("");
     setPaused(false);
   };
 
@@ -84,7 +112,7 @@ export default function Home() {
           className="grid grid-cols-5 grid-rows-5 gap-4 w-screen h-screen max-w-6xl max-h-[90vh]"
           style={{ gridTemplateRows: "repeat(5, 1fr)" }}
         >
-          {/* Editor on the left */}
+          {/* Editor */}
           <div className="rounded-3xl col-span-3 row-span-5 col-start-1 flex items-center justify-center">
             <MonacoEditorWrapper
               code={userCode}
@@ -99,6 +127,7 @@ export default function Home() {
               <ChallengeCard
                 category={currentChallenge.category}
                 prompt={currentChallenge.prompt}
+                fn_name={currentChallenge.fn_name}
                 currentIndex={currentIndex}
                 total={challenges.length}
               />
@@ -115,6 +144,8 @@ export default function Home() {
               onSettingsLoad={handleLoad}
               hasChallenges={challenges.length > 0}
               paused={paused}
+              onTimeout={handleTimeout}
+              onTick={setTimeLeft}
             />
           </div>
 
@@ -135,6 +166,16 @@ export default function Home() {
         onClose={handleNext}
         results={results}
         loading={loading}
+      />
+
+      {/* Completion Modal */}
+      <CompletionModal
+        isOpen={completionOpen}
+        onClose={() => setCompletionOpen(false)}
+        completed={completed}
+        total={challenges.length}
+        timeLeft={timeLeft}
+        reason={completionReason}
       />
     </main>
   );
