@@ -1,7 +1,8 @@
 # backend/app/routes/challenge.py
 
 from fastapi import APIRouter, Query
-import json, random
+import json
+import random
 from pathlib import Path
 
 router = APIRouter(tags=["challenge"])
@@ -22,7 +23,8 @@ for file in challenges_dir.glob("*.json"):
 def get_random_challenge(category: str = None):
     if category:
         selected_categories = [c.strip().lower() for c in category.split(",")]
-        challenges = [c for c in challenge_bank if c["category"].lower() in selected_categories]
+        challenges = [
+            c for c in challenge_bank if c["category"].lower() in selected_categories]
     else:
         challenges = challenge_bank
 
@@ -32,13 +34,14 @@ def get_random_challenge(category: str = None):
 @router.get("/challenges")
 def get_challenges(
     category: str = Query(None, description="Comma-separated categories"),
-    limit: int = Query(10, ge=1),
+    limit: int = Query(10, ge=0),
     shuffle: bool = False,
     seed: int = None
 ):
     if category:
         selected_categories = [c.strip().lower() for c in category.split(",")]
-        challenges = [c for c in challenge_bank if c["category"].lower() in selected_categories]
+        challenges = [
+            c for c in challenge_bank if c["category"].lower() in selected_categories]
     else:
         challenges = challenge_bank
 

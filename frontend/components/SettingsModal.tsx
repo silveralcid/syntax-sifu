@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { Challenge } from "@/types/challenge";
 
 interface Category {
@@ -23,6 +22,10 @@ export default function SettingsModal({
   const [categories, setCategories] = useState<Category[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+
+  // new state for shuffle & limit
+  const [shuffle, setShuffle] = useState(true);
+  const [limit, setLimit] = useState(0); // 0 = all
 
   // Fetch categories
   useEffect(() => {
@@ -47,7 +50,9 @@ export default function SettingsModal({
     try {
       const url = `${
         process.env.NEXT_PUBLIC_API_URL
-      }/challenges?category=${selected.join(",")}`;
+      }/challenges?category=${selected.join(
+        ","
+      )}&limit=${limit}&shuffle=${shuffle}`;
       const res = await fetch(url);
       const data = await res.json();
       onLoad(data);
@@ -72,6 +77,7 @@ export default function SettingsModal({
         <div className="modal-box w-96 max-w-2xl">
           <h3 className="font-bold text-lg mb-4">Select Categories</h3>
 
+          {/* Category checkboxes */}
           <div className="flex flex-col gap-2 mb-6">
             {categories.map((cat) => (
               <label
@@ -92,6 +98,34 @@ export default function SettingsModal({
             ))}
           </div>
 
+          {/* Shuffle toggle */}
+          <div className="form-control mb-4">
+            <label className="label cursor-pointer justify-between">
+              <span className="label-text">Shuffle challenges</span>
+              <input
+                type="checkbox"
+                className="toggle toggle-primary"
+                checked={shuffle}
+                onChange={() => setShuffle((s) => !s)}
+              />
+            </label>
+          </div>
+
+          {/* Limit input */}
+          <div className="form-control mb-6">
+            <label className="label">
+              <span className="label-text">Limit (0 = all)</span>
+            </label>
+            <input
+              type="number"
+              min={0}
+              value={limit}
+              onChange={(e) => setLimit(Number(e.target.value))}
+              className="input input-bordered w-full"
+            />
+          </div>
+
+          {/* Action buttons */}
           <div className="modal-action flex justify-between">
             <button onClick={onClose} className="btn btn-outline">
               Cancel
