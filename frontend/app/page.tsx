@@ -30,11 +30,15 @@ export default function Home() {
     setUserCode("");
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async () => {
     if (!currentChallenge) return;
 
-    // Pause timer
     setPaused(true);
+    setResults(null);
+    setModalOpen(true);
+    setLoading(true);
 
     try {
       const res = await fetch(
@@ -45,7 +49,7 @@ export default function Home() {
           body: JSON.stringify({
             code: userCode,
             fn_name: currentChallenge.fn_name,
-            language: "python", // can make dynamic later
+            language: "python",
             tests: currentChallenge.tests,
             prompt: currentChallenge.prompt,
           }),
@@ -54,9 +58,10 @@ export default function Home() {
 
       const data: SubmitResponse = await res.json();
       setResults(data);
-      setModalOpen(true);
     } catch (err) {
       console.error("Error submitting code:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -125,7 +130,12 @@ export default function Home() {
       </div>
 
       {/* Result Modal */}
-      <ResultModal isOpen={modalOpen} onClose={handleNext} results={results} />
+      <ResultModal
+        isOpen={modalOpen}
+        onClose={handleNext}
+        results={results}
+        loading={loading}
+      />
     </main>
   );
 }
