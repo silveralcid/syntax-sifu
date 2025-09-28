@@ -17,7 +17,7 @@ export default function ChallengeControls({
   onSubmit,
   onSettingsLoad,
   hasChallenges,
-  duration = 300,
+  duration = 120,
 }: ChallengeControlsProps) {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [isOpen, setIsOpen] = useState(false);
