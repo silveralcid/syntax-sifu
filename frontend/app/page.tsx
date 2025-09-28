@@ -6,33 +6,53 @@ import ChallengeCard from "@/components/ChallengeCard";
 import TestCases from "@/components/TestCases";
 import ChallengeControls from "@/components/ChallengeControls";
 
-interface Challenge {
-  id: number;
+import { Challenge } from "@/types/challenge";
+
+interface Submission {
+  challengeId: number;
   category: string;
   prompt: string;
-  fn_name: string;
-  tests?: { input: unknown[]; output: unknown }[];
+  code: string;
 }
 
 export default function Home() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [userCode, setUserCode] = useState<string>(""); // from Monaco
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
 
   const currentChallenge = challenges[currentIndex];
 
   const handleLoad = (newChallenges: Challenge[]) => {
     setChallenges(newChallenges);
-    setCurrentIndex(0); // reset queue to first challenge
+    setCurrentIndex(0);
+    setUserCode(""); // reset editor
   };
 
   const handleSkip = () => {
-    if (!challenges.length) return;
     setCurrentIndex((i) => (i + 1 < challenges.length ? i + 1 : 0));
+    setUserCode("");
   };
 
   const handleSubmit = () => {
-    console.log("Submitted:", currentChallenge);
-    // TODO: hook into validation API
+    if (!currentChallenge) return;
+
+    // Append submission
+    setSubmissions((prev) => [
+      ...prev,
+      {
+        challengeId: currentChallenge.id,
+        category: currentChallenge.category,
+        prompt: currentChallenge.prompt,
+        code: userCode,
+      },
+    ]);
+
+    console.log("All submissions so far:", submissions);
+
+    // Move to next challenge
+    setCurrentIndex((i) => (i + 1 < challenges.length ? i + 1 : 0));
+    setUserCode("");
   };
 
   return (
@@ -44,11 +64,15 @@ export default function Home() {
         >
           {/* Editor on the left */}
           <div className="rounded-3xl col-span-3 row-span-5 col-start-1 flex items-center justify-center">
-            <MonacoEditorWrapper />
+            <MonacoEditorWrapper
+              code={userCode}
+              language="python"
+              onChange={(val) => setUserCode(val || "")}
+            />
           </div>
 
-          {/* Right column top half: ChallengeCard */}
-          <div className="rounded-3xl col-span-2 row-span-2 col-start-4 flex items-center justify-center bg-base-200">
+          {/* Right column top half: Challenge card */}
+          <div className="rounded-3xl col-span-2 row-span-2 col-start-4 flex items-center justify-center">
             {currentChallenge ? (
               <ChallengeCard
                 category={currentChallenge.category}
@@ -59,17 +83,18 @@ export default function Home() {
             )}
           </div>
 
-          {/* Right column middle half: ChallengeControls */}
-          <div className="rounded-3xl col-span-2 row-start-3 col-start-4 bg-base-200 flex items-center justify-center">
+          {/* Right column middle half: Controls */}
+          <div className="rounded-3xl col-span-2 row-start-3 col-start-4 flex items-center justify-center">
             <ChallengeControls
               onSkip={handleSkip}
               onSubmit={handleSubmit}
               onSettingsLoad={handleLoad}
+              hasChallenges={challenges.length > 0}
             />
           </div>
 
-          {/* Bottom right: TestCases */}
-          <div className="rounded-3xl col-span-2 row-span-2 row-start-4 col-start-4 bg-base-200 flex items-center justify-center">
+          {/* Bottom right: Test cases */}
+          <div className="rounded-3xl col-span-2 row-span-2 row-start-4 col-start-4 flex items-center justify-center">
             {currentChallenge?.tests ? (
               <TestCases tests={currentChallenge.tests} />
             ) : (

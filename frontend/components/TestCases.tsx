@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Challenge } from "@/types/challenge";
 
 interface TestCase {
   input: unknown[];

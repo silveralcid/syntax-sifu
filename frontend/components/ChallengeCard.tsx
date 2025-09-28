@@ -1,5 +1,7 @@
 "use client";
 
+import { Challenge } from "@/types/challenge";
+
 interface ChallengeCardProps {
   category: string;
   prompt: string;

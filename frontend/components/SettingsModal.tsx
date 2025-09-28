@@ -2,16 +2,11 @@
 
 import { useEffect, useState } from "react";
 
+import { Challenge } from "@/types/challenge";
+
 interface Category {
   category: string;
   count: number;
-}
-
-interface Challenge {
-  id: number;
-  category: string;
-  prompt: string;
-  fn_name: string;
 }
 
 interface SettingsModalProps {

@@ -1,24 +1,31 @@
 "use client";
 
 import Editor from "@monaco-editor/react";
+import { Challenge } from "@/types/challenge";
 
-export default function CodeWindow() {
+interface MonacoEditorWrapperProps {
+  code: string;
+  language?: string;
+  onChange?: (value: string | undefined) => void;
+}
+
+export default function MonacoEditorWrapper({
+  code,
+  language = "python",
+  onChange,
+}: MonacoEditorWrapperProps) {
   return (
-    <div className="mockup-window border border-base-300 w-full h-full">
-      {/* content area */}
-      <div className="border-t border-base-300 w-full h-full rounded-b-xl overflow-hidden">
-        <Editor
-          className="w-full h-full"
-          defaultLanguage="python"
-          defaultValue={"# Start typing..."}
-          theme="vs-dark"
-          options={{
-            fontSize: 14,
-            minimap: { enabled: false },
-            automaticLayout: true,
-          }}
-        />
-      </div>
-    </div>
+    <Editor
+      height="100%"
+      defaultLanguage={language}
+      value={code} // 👈 use value instead of defaultValue for controlled input
+      theme="vs-dark"
+      onChange={onChange}
+      options={{
+        fontSize: 14,
+        minimap: { enabled: false },
+        automaticLayout: true,
+      }}
+    />
   );
 }
