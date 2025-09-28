@@ -23,9 +23,8 @@ export default function SettingsModal({
   const [selected, setSelected] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // new state for shuffle & limit
   const [shuffle, setShuffle] = useState(true);
-  const [limit, setLimit] = useState(0); // 0 = all
+  const [limit, setLimit] = useState(0);
 
   // Fetch categories
   useEffect(() => {
@@ -126,17 +125,30 @@ export default function SettingsModal({
           </div>
 
           {/* Action buttons */}
-          <div className="modal-action flex justify-between">
+          <div className="modal-action flex justify-between items-center w-full">
             <button onClick={onClose} className="btn btn-outline">
               Cancel
             </button>
-            <button
-              onClick={handleLoad}
-              disabled={loading || !selected.length}
-              className={`btn btn-primary ${loading ? "loading" : ""}`}
-            >
-              {loading ? "Loading..." : "Load"}
-            </button>
+
+            <div className="flex gap-2">
+              {/* Wake Up button */}
+              <a
+                href="https://syntax-sifu.onrender.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                Wake Up, Sifu.
+              </a>
+
+              <button
+                onClick={handleLoad}
+                disabled={loading || !selected.length}
+                className={`btn btn-primary ${loading ? "loading" : ""}`}
+              >
+                {loading ? "Loading..." : "Load"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
