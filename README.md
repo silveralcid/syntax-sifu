@@ -1,4 +1,3 @@
-```markdown
 # 🧠 Syntax Sifu — One-Day MVP Prototype
 
 > Prototype built in **5h 32m** to explore stack feasibility (Next.js + FastAPI).  
@@ -62,11 +61,10 @@ Create a lightweight, playful coding trainer where users:
 ## 🧪 Quick API Sketch
 
 ```
-
 GET /challenge?category=loops      → random prompt
 POST /submit_code {code,fn,lang}   → run tests & return result
-
 ```
+
 
 ---
 
@@ -91,4 +89,4 @@ POST /submit_code {code,fn,lang}   → run tests & return result
 
 LeetCode-style layout with snarky tone + minimal UI for focus.  
 Future ideas: scoring streaks, AI-generated roasts, community challenge packs.
-```
+
