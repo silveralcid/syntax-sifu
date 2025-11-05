@@ -1,6 +1,6 @@
 # 🧠 Syntax Sifu — One-Day MVP Prototype
 
-> Prototype built in **5h 32m** to explore stack feasibility (Next.js + FastAPI).  
+> Prototype built in **5h 32m** to explore new tech.  
 > Not an active project — just an experiment in rapid MVP design.
 
 ---
